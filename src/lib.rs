@@ -1,14 +1,49 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+mod enumerations;
+mod factorization;
+mod fraction;
+mod galoisfields;
+mod generic;
+mod ideal;
+mod intfactorization;
+mod linearalgebra;
+mod multivarpolynom;
+mod numbertheoretical;
+mod powerseries;
+mod promoteconvert;
+mod qq;
+mod quotient;
+mod rationalcanonical;
+mod resultant;
+mod ringtypes;
+mod specialseries;
+mod typevars;
+mod univarpolynom;
+mod zz;
+mod zzmod;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+pub mod prelude {
+    pub use crate::{
+        enumerations::*,
+        factorization::*,
+        fraction::*,
+        galoisfields::*,
+        generic::*,
+        ideal::*,
+        intfactorization::*,
+        linearalgebra::*,
+        multivarpolynom::*,
+        numbertheoretical::*,
+        powerseries::*,
+        promoteconvert::*,
+        qq::*,
+        quotient::*,
+        rationalcanonical::*,
+        resultant::*,
+        ringtypes::*,
+        specialseries::*,
+        typevars::*,
+        univarpolynom::*,
+        zz::*,
+        zzmod::*,
+    };
 }
