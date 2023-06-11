@@ -2,7 +2,13 @@ pub trait RingClass {
     //
 }
 
-pub trait Ring<R: RingClass> {
+use std::ops::{
+    Add,
+    Mul,
+};
+pub trait Ring:
+    Sized + Add<Output = Self> + Mul<Output = Self>
+{
     //
 }
 
@@ -32,3 +38,5 @@ trait QuotientRingClass: RingClass {
 pub struct ZZ<const N: usize> {
     //
 }
+
+struct Hom {}
