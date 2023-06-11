@@ -1,3 +1,4 @@
+mod determinant;
 mod enumerations;
 mod factorization;
 mod fraction;
@@ -23,6 +24,7 @@ mod zzmod;
 
 pub mod prelude {
     pub use crate::{
+        determinant::*,
         enumerations::*,
         factorization::*,
         fraction::*,
@@ -46,4 +48,10 @@ pub mod prelude {
         zz::*,
         zzmod::*,
     };
+}
+
+pub trait AbstractMatrix:
+    std::ops::Index<(usize, usize)>
+{
+    //
 }
