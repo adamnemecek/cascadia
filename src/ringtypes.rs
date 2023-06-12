@@ -166,6 +166,15 @@ impl<R: Ring, S: Ring, F: Fn(R) -> S> Hom<R, S, F> {
     }
 }
 
+pub struct VectorSpace<R, V> {
+    base: V,
+    pivr: Vec<R>,
+}
+
 mod tests {
     //
+
+    fn test_homomorphism_generic() {
+        //
+    }
 }
