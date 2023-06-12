@@ -114,6 +114,7 @@ impl<A: Iterator, B: Iterator> Iterator
     }
 
     fn size_hint(&self) -> (usize, Option<usize>) {
+        // self.a.si
         unimplemented!()
     }
 }

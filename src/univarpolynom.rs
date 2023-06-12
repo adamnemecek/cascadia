@@ -4,6 +4,20 @@ pub struct UnivariatePolynomial<S: Ring> {
     inner: Vec<S>, //
 }
 
+impl<S: Ring> UnivariatePolynomial<S> {
+    pub fn new(inner: Vec<S>) -> Self {
+        Self { inner }
+    }
+}
+
+impl<S: Ring> FromIterator<S> for UnivariatePolynomial<S> {
+    fn from_iter<T: IntoIterator<Item = S>>(
+        iter: T,
+    ) -> Self {
+        Self::new(iter.into_iter().collect())
+    }
+}
+
 //
 
 impl<S: Ring> std::ops::Add for UnivariatePolynomial<S> {

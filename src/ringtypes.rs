@@ -12,6 +12,7 @@ use std::ops::{
 
 pub trait Ring:
     Sized
+    + Eq
     + Add<Output = Self>
     + Sub<Output = Self>
     + Mul<Output = Self>
