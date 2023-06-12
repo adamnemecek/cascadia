@@ -83,6 +83,18 @@ impl ZZ {
 //         unimplemented!()
 //     }
 // }
+
+fn modulo(a: i32, b: i32) -> i32 {
+    (a % b + b) % b
+}
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+
+pub struct ZZMod1<const M: usize> {
+    //
+    val: i32,
+}
+
 #[derive(Clone, Copy, PartialEq, Eq)]
 
 pub struct ZZMod {
@@ -90,6 +102,22 @@ pub struct ZZMod {
     val: i32,
     mod_: i32,
 }
+
+impl ZZMod {
+    pub fn new(val: i32, mod_: i32) -> Self {
+        Self {
+            val: modulo(val, mod_),
+            mod_,
+        }
+    }
+}
+
+// impl Add for ZZMod {
+//     type Output = Self;
+//     fn add(self, rhs: Self) -> Self {
+//         Self::new()
+//     }
+// }
 
 // pub struct Frac<
 
