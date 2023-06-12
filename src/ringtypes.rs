@@ -61,7 +61,14 @@ pub trait FractionRingClass: RingClass {
 // trait AlgebraicallyClosedFieldTrait <: FieldTrait {}
 
 // Integers
+#[derive(Clone, Copy, PartialEq, Eq)]
 pub struct ZZ(i32);
+
+impl ZZ {
+    pub fn mod_(i: i32) -> ZZMod {
+        unimplemented!()
+    }
+}
 
 // impl std::ops::Add for ZZ {
 //     type Output = Self;
@@ -70,15 +77,26 @@ pub struct ZZ(i32);
 //     }
 // }
 
+// impl std::ops::Div<usize> for ZZ {
+//     type Output = ZZMod;
+//     fn div(rhs: usize) -> Self::Output {
+//         unimplemented!()
+//     }
+// }
+#[derive(Clone, Copy, PartialEq, Eq)]
+
 pub struct ZZMod {
     //
+    val: i32,
+    mod_: i32,
 }
 
 // pub struct Frac<
 
-// R = ZZ[x,y];
-// S = ZZ[a,b,c];
+// R = ZZ[x,y]; // polynoimal ring
+// S = ZZ[a,b,c]; // polynomial ring
 // f = map(R,S,{x^2,x*y,y^2})
+//  f(a+b+c^2) =>
 pub struct Hom<R: Ring, S: Ring, F: Fn(R) -> S> {
     //
     f: F,
@@ -87,6 +105,14 @@ pub struct Hom<R: Ring, S: Ring, F: Fn(R) -> S> {
 
 impl<R: Ring, S: Ring, F: Fn(R) -> S> Hom<R, S, F> {
     // fn new()
+
+    pub fn domain(&self) -> R {
+        unimplemented!()
+    }
+
+    pub fn codomain(&self) -> S {
+        unimplemented!()
+    }
 
     pub fn eval(&self, v: R) -> S {
         (self.f)(v)
