@@ -1,3 +1,5 @@
+use crate::prelude::*;
+
 pub trait RingClass {
     //
 }
@@ -7,21 +9,6 @@ use std::ops::{
     Mul,
     Sub,
 };
-
-pub trait Inv {
-    type Output;
-    fn inv(&self) -> Self::Output;
-}
-
-pub trait Zero {
-    fn zero() -> Self;
-    fn is_zero(&self) -> bool;
-}
-
-pub trait One {
-    fn one() -> Self;
-    fn is_one(&self) -> bool;
-}
 
 pub trait Ring:
     Sized

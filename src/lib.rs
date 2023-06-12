@@ -1,5 +1,6 @@
 mod determinant;
 mod enumerations;
+mod ext;
 mod factorization;
 mod fraction;
 mod galoisfields;
@@ -26,6 +27,7 @@ pub mod prelude {
     pub use crate::{
         determinant::*,
         enumerations::*,
+        ext::*,
         factorization::*,
         fraction::*,
         galoisfields::*,
