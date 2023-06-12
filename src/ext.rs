@@ -81,17 +81,18 @@ pub enum Either<A, B> {
     Right(B),
 }
 
+use std::iter::Fuse;
 pub struct ZipLongest<A: Iterator, B: Iterator> {
-    a: A,
-    b: B,
+    a: Fuse<A>,
+    b: Fuse<B>,
     // len: usize,
 }
 
 impl<A: Iterator, B: Iterator> ZipLongest<A, B> {
     pub fn new(a: A, b: B) -> Self {
         Self {
-            a,
-            b,
+            a: a.fuse(),
+            b: b.fuse(),
             // len: a.size_hint().0.max(b.size_hint().0),
         }
     }
@@ -102,7 +103,14 @@ impl<A: Iterator, B: Iterator> Iterator
 {
     type Item = Either<A::Item, B::Item>;
     fn next(&mut self) -> Option<Self::Item> {
-        None
+        match (self.a.next(), self.b.next()) {
+            (Some(a), (Some(b))) => {
+                Either::Both(a, b).into()
+            }
+            (Some(a), _) => Either::Left(a).into(),
+            (_, Some(b)) => Either::Right(b).into(),
+            _ => None,
+        }
     }
 
     fn size_hint(&self) -> (usize, Option<usize>) {
