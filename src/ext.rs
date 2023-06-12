@@ -80,3 +80,32 @@ pub enum Either<A, B> {
     Both(A, B),
     Right(B),
 }
+
+pub struct ZipLongest<A: Iterator, B: Iterator> {
+    a: A,
+    b: B,
+    // len: usize,
+}
+
+impl<A: Iterator, B: Iterator> ZipLongest<A, B> {
+    pub fn new(a: A, b: B) -> Self {
+        Self {
+            a,
+            b,
+            // len: a.size_hint().0.max(b.size_hint().0),
+        }
+    }
+}
+
+impl<A: Iterator, B: Iterator> Iterator
+    for ZipLongest<A, B>
+{
+    type Item = Either<A::Item, B::Item>;
+    fn next(&mut self) -> Option<Self::Item> {
+        None
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        unimplemented!()
+    }
+}
