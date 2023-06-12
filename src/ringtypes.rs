@@ -76,7 +76,23 @@ pub struct ZZMod {
 
 // pub struct Frac<
 
-struct Hom<S: Ring, R: Ring, F> {
+// R = ZZ[x,y];
+// S = ZZ[a,b,c];
+// f = map(R,S,{x^2,x*y,y^2})
+pub struct Hom<R: Ring, S: Ring, F: Fn(R) -> S> {
     //
+    f: F,
     ph: std::marker::PhantomData<(S, R, F)>,
+}
+
+impl<R: Ring, S: Ring, F: Fn(R) -> S> Hom<R, S, F> {
+    // fn new()
+
+    pub fn eval(&self, v: R) -> S {
+        (self.f)(v)
+    }
+}
+
+mod tests {
+    //
 }
