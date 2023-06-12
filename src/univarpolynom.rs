@@ -23,6 +23,7 @@ impl<S: Ring> FromIterator<S> for UnivariatePolynomial<S> {
 impl<S: Ring> std::ops::Add for UnivariatePolynomial<S> {
     type Output = Self;
     fn add(self, rhs: Self) -> Self {
+        // self.iter().zip_longest
         Self {
             inner: self
                 .inner

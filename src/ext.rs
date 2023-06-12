@@ -118,3 +118,14 @@ impl<A: Iterator, B: Iterator> Iterator
         unimplemented!()
     }
 }
+
+pub fn zip_longest<A: Iterator, B: Iterator>(
+    a: A,
+    b: B,
+) -> ZipLongest<A, B> {
+    ZipLongest::new(a, b)
+}
+
+// pub trait IteratorExt {
+// fn zip_longest(&self, other: )
+// }
