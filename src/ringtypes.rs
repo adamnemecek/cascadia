@@ -90,10 +90,29 @@ fn modulo(a: i32, b: i32) -> i32 {
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 
-pub struct ZZMod1<const M: usize> {
-    //
-    val: i32,
+pub struct ZZMod1<const M: i32>(i32);
+
+macro_rules! impl_op {
+    ($trait: ty, $fn: ident) => {
+        impl<const N: i32> $trait for ZZMod1<N> {
+            type Output = Self;
+            fn $fn(self, rhs: Self) -> Self {
+                Self(modulo(self.0.$fn(rhs.0), N))
+            }
+        }
+    };
 }
+
+// impl<const N: i32> Add for ZZMod1<N> {
+//     type Output = Self;
+//     fn add(self, rhs: Self) -> Self {
+//         // Self(modulo(self.0 + rhs.0, N))
+//         // Self(modulo(self.0.add(rhs.0), N))
+//     }
+// }
+impl_op!(Add, add);
+impl_op!(Sub, sub);
+impl_op!(Mul, mul);
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 
