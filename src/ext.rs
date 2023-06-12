@@ -64,7 +64,7 @@ impl_div_rem!(u8);
 impl_div_rem!(u16);
 impl_div_rem!(u32);
 
-fn gcd(a: usize, b: usize) -> usize {
+pub fn gcd(a: usize, b: usize) -> usize {
     if b.is_zero() {
         return a;
     }
@@ -73,4 +73,10 @@ fn gcd(a: usize, b: usize) -> usize {
 
     // }
     unimplemented!()
+}
+
+pub enum Either<A, B> {
+    Left(A),
+    Both(A, B),
+    Right(B),
 }
