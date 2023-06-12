@@ -144,6 +144,7 @@ impl ZZMod {
 // S = ZZ[a,b,c]; // polynomial ring
 // f = map(R,S,{x^2,x*y,y^2})
 //  f(a+b+c^2) =>
+
 pub struct Hom<R: Ring, S: Ring, F: Fn(R) -> S> {
     //
     f: F,
@@ -176,5 +177,6 @@ mod tests {
 
     fn test_homomorphism_generic() {
         //
+        // ZZ
     }
 }
