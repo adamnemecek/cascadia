@@ -3,6 +3,10 @@ pub trait Inv {
     fn inv(&self) -> Self::Output;
 }
 
+pub trait Mod {
+    // fn mod_(&)
+}
+
 pub trait Zero {
     fn zero() -> Self;
     fn is_zero(&self) -> bool;
@@ -60,6 +64,13 @@ impl_div_rem!(u8);
 impl_div_rem!(u16);
 impl_div_rem!(u32);
 
-// fn gcd(a: usize, b: usize) -> usize {
-//     // a.is
-// }
+fn gcd(a: usize, b: usize) -> usize {
+    if b.is_zero() {
+        return a;
+    }
+
+    // loop {
+
+    // }
+    unimplemented!()
+}

@@ -33,9 +33,13 @@ pub trait FractionRingClass: RingClass {
 // trait QuotientRing{S<:RingInt,T<:QuotientRingClass} <: Ring{T} {}
 // trait Polynomial{S<:Ring,T<:PolyRingClass} <: Ring{T} {}
 
-// pub trait Polynomial<R: Ring>: Ring {
-//     //
-// }
+pub trait Polynomial<R: Ring>: Ring {
+    //
+    fn generator(
+        &self,
+        index: usize,
+    ) -> Generator<'_, Self>;
+}
 // trait RingTrait {}
 // trait CommutativeRingTrait <: RingTrait {}
 // trait IntegralDomainTrait <: CommutativeRingTrait {}
@@ -46,6 +50,12 @@ pub trait FractionRingClass: RingClass {
 // trait EuclidianDomainTrait <: PrincipalIdealDomainTrait {}
 // trait FieldTrait <: EuclidianDomainTrait {}
 // trait AlgebraicallyClosedFieldTrait <: FieldTrait {}
+
+macro_rules! ZZ {
+    ($ty: ty) => {
+        //
+    };
+}
 
 // Integers
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -70,6 +80,11 @@ impl ZZ {
 //         unimplemented!()
 //     }
 // }
+
+pub struct Generator<'a, R: Ring> {
+    parent: &'a R,
+    symbol: &'a str,
+}
 
 fn modulo(a: i32, b: i32) -> i32 {
     (a % b + b) % b

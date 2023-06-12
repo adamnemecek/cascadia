@@ -1,5 +1,11 @@
 use crate::prelude::*;
 
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub enum Order {
+    Preflex,
+    Grevlex,
+}
+
 pub struct Ideal<R: Ring> {
     base: Vec<R>,
 }
