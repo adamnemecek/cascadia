@@ -40,6 +40,7 @@ pub trait Polynomial<R: Ring>: Ring {
         index: usize,
     ) -> Generator<'_, Self>;
 }
+
 // trait RingTrait {}
 // trait CommutativeRingTrait <: RingTrait {}
 // trait IntegralDomainTrait <: CommutativeRingTrait {}
