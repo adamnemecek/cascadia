@@ -74,7 +74,7 @@ pub enum Expr<const N: usize, R: Ring2<N>> {
     Leaf(R::Elem),
     Add(Box<Self>, Box<Self>),
     // Add(R::Elem, R::Elem),
-    // Sub(R::Elem, R::Elem),
+    // Sub(Self, Self),
     // Times(R::Elem, R::Elem),
     // Power(R::Elem, usize),
 }
@@ -84,7 +84,7 @@ impl<const N: usize, R: Ring2<N>> std::ops::Add
 {
     type Output = Self;
     fn add(self, rhs: Self) -> Self {
-        unimplemented!()
+        Self::Add(self.into(), rhs.into())
     }
 }
 
