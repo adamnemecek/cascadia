@@ -65,10 +65,44 @@ pub trait Ring1 {
 fn poly<R: Ring1, const N: usize>(
     r: R,
     a: [&str; N],
-) -> [R::Elem; N] {
+) -> (usize, [R::Elem; N]) {
     //
     // [0; N]
     unimplemented!()
+}
+
+struct ZZ {}
+
+impl Ring1 for ZZ {
+    //
+    type Elem = usize;
+}
+
+fn test() {
+    let (P, [b, c]) = poly(ZZ {}, ["s", "d"]);
+}
+
+pub fn hom<R: Ring1, S: Ring1>() {
+    //
+}
+
+pub struct Gens<const N: usize, R: Ring1>([R::Elem; N]);
+
+// FromIterator<term::Term<Exponent, BaseRing>>
+
+macro_rules! gens {
+    () => {
+        //
+    };
+}
+
+// maybe hom should be parametrized by the
+fn hom1<const A: usize, const B: usize>(
+    a: [usize; A],
+    b: [usize; B],
+    images: [usize; B],
+) {
+    //
 }
 
 impl_div_rem!(usize);
