@@ -58,6 +58,19 @@ macro_rules! impl_div_rem {
     };
 }
 
+pub trait Ring1 {
+    type Elem;
+}
+
+fn poly<R: Ring1, const N: usize>(
+    r: R,
+    a: [&str; N],
+) -> [R::Elem; N] {
+    //
+    // [0; N]
+    unimplemented!()
+}
+
 impl_div_rem!(usize);
 impl_div_rem!(isize);
 impl_div_rem!(u8);
