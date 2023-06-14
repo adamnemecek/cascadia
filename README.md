@@ -27,14 +27,17 @@ and then the user can do
 poly!(ZZ::default(), x, y, z);
 // vs
 poly!(ZZ(4), x, y, z);
-```
 
+
+```
+I wonder if i can like have a polynomial parametrized by ZZ or one that takes a ZZ as value.
 
 ```rust
 trait Ring {
     fn base_ring(&self) -> ...
     fn ideal(&self) -> ...
     fn gens(&self) -> ...
+    fn coeffs(&self) -> ...
 }
 ```
 

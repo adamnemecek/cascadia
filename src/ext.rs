@@ -79,6 +79,12 @@ pub enum Expr<const N: usize, R: Ring2<N>> {
     // Power(R::Elem, usize),
 }
 
+macro_rules! expr {
+    () => {
+        //
+    };
+}
+
 impl<const N: usize, R: Ring2<N>> Expr<N, R> {
     fn eval(self) {
         //
@@ -145,10 +151,12 @@ pub trait Ring2<const N: usize>: Sized {
     // fn base_ring(&self) ->
     // fn ideal
     // fn gens
+    // fn coeffs()
 }
 
 pub trait NCRing<const N: usize> {
     //
+    type Elem;
 }
 
 pub struct Hom2<
@@ -193,7 +201,7 @@ fn hom2<
     r: R,
     // note that th
     // images: [S::Elem; B],
-    images: Expr<B, R>,
+    images: [Expr<B, R>; B],
 ) -> Hom2<A, B, S, R> {
     //
     Hom2::new(s, r)
