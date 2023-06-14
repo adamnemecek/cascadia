@@ -62,6 +62,45 @@ pub trait Ring1 {
     type Elem;
 }
 
+struct ZZ {}
+
+pub trait RingElem<const N: usize, R: Ring2<N>>:
+    Sized
+{
+    //add, mul etc
+}
+
+pub enum Expr<const N: usize, R: Ring2<N>> {
+    Leaf(R::Elem),
+    Add(Box<Self>, Box<Self>),
+    // Add(R::Elem, R::Elem),
+    // Sub(R::Elem, R::Elem),
+    // Times(R::Elem, R::Elem),
+    // Power(R::Elem, usize),
+}
+
+impl<const N: usize, R: Ring2<N>> std::ops::Add
+    for Expr<N, R>
+{
+    type Output = Self;
+    fn add(self, rhs: Self) -> Self {
+        unimplemented!()
+    }
+}
+
+// impl<const N: usize, R: Ring2<N>, E: RingElem<N, R>> From<E>
+//     for Expr<N, R>
+// {
+//     fn from(value: R::Elem) -> Self {
+//         unimplemented!()
+//     }
+// }
+
+impl Ring1 for ZZ {
+    //
+    type Elem = usize;
+}
+
 fn poly<R: Ring1, const N: usize>(
     r: R,
     a: [&str; N],
@@ -71,18 +110,7 @@ fn poly<R: Ring1, const N: usize>(
     unimplemented!()
 }
 
-struct ZZ {}
-
-pub trait RingElem {
-    //add, mul etc
-}
-
-impl Ring1 for ZZ {
-    //
-    type Elem = usize;
-}
-
-fn test() {
+fn poly_test() {
     let (P, [b, c]) = poly(ZZ {}, ["s", "d"]);
 }
 
@@ -104,8 +132,12 @@ macro_rules! gens {
 // pub trait DynRing {
 // }
 
-pub trait Ring2<const N: usize> {
-    type Elem: RingElem;
+pub trait Ring2<const N: usize>: Sized {
+    type Elem: RingElem<N, Self>;
+}
+
+pub trait NCRing<const N: usize> {
+    //
 }
 
 pub struct Hom2<
@@ -142,6 +174,8 @@ fn hom2<
     // images: [usize; B],
     s: S,
     r: R,
+    // note that th
+    images: [S::Elem; B],
 ) -> Hom2<A, B, S, R> {
     //
     Hom2 { ph: <_>::default() }

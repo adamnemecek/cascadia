@@ -20,6 +20,17 @@ S = ZZ[a,b,c];
 f = map(R,S,{x^2,x*y,y^2}) // note that macaulay flips the order of things
 ```
 
+I guess one option for the api do distinguish ZZ from ZZ(5) is providing a default implementation for the ZZ
+
+and then the user can do 
+```rust
+poly!(ZZ::default(), x, y, z);
+// vs
+poly!(ZZ(4), x, y, z);
+```
+
+
+# API Usage
 ```rust
 
 // poly!(QQ, gens!(x, y, z)) == 
@@ -31,7 +42,12 @@ f = map(R,S,{x^2,x*y,y^2}) // note that macaulay flips the order of things
 let (R, [x, y]) = poly!(ZZ, x, y);
 let (S, [a, b, c]) = poly!(ZZ, a, b, c);
 
+// note that the S has three elements, same 
+
+// the question is what does the hom funciton take? they are not Ring::Elem per se, since 
 let f = hom(S, R, [x^2, x*y, y^2]);
+
+
 
 hom()
 
