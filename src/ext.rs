@@ -79,6 +79,12 @@ pub enum Expr<const N: usize, R: Ring2<N>> {
     // Power(R::Elem, usize),
 }
 
+impl<const N: usize, R: Ring2<N>> Expr<N, R> {
+    fn eval(self) {
+        //
+    }
+}
+
 impl<const N: usize, R: Ring2<N>> std::ops::Add
     for Expr<N, R>
 {
@@ -146,6 +152,8 @@ pub struct Hom2<
     S: Ring2<A>,
     R: Ring2<B>,
 > {
+    domain: S,
+    codomain: R,
     //
     ph: std::marker::PhantomData<(S, R)>,
 }
@@ -158,7 +166,11 @@ impl<
     > Hom2<A, B, S, R>
 {
     pub fn new(s: S, r: R) -> Self {
-        Hom2 { ph: <_>::default() }
+        Self {
+            domain: s,
+            codomain: r,
+            ph: <_>::default(),
+        }
     }
 }
 
@@ -175,10 +187,11 @@ fn hom2<
     s: S,
     r: R,
     // note that th
-    images: [S::Elem; B],
+    // images: [S::Elem; B],
+    images: Expr<B, R>,
 ) -> Hom2<A, B, S, R> {
     //
-    Hom2 { ph: <_>::default() }
+    Hom2::new(s, r)
 }
 
 impl_div_rem!(usize);
