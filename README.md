@@ -13,11 +13,30 @@ This crate relies on macros quite a bit for it's API.
 
 The api is inspired by oscar.jl, singular, gap, 
 
+
+```macaulay2
+R = ZZ[x,y];
+S = ZZ[a,b,c];
+f = map(R,S,{x^2,x*y,y^2}) // note that macaulay flips the order of things
+```
+
 ```rust
-poly!(QQ, gens!(x, y, z)) == 
+
+// poly!(QQ, gens!(x, y, z)) == 
 
 
-let (P, [x,y,z]) = poly!(QQ, x, y, z);
+// let (P, [x,y,z]) = poly!(QQ, x, y, z);
+// the above macaulay2 code would be 
+
+let (R, [x, y]) = poly!(ZZ, x, y);
+let (S, [a, b, c]) = poly!(ZZ, a, b, c);
+
+let f = hom(S, R, [x^2, x*y, y^2]);
+
+hom()
+
+
+
 ```
 <!-- 
 #[macro_export]
