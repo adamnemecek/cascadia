@@ -86,9 +86,9 @@ fn test() {
     let (P, [b, c]) = poly(ZZ {}, ["s", "d"]);
 }
 
-pub fn hom<R: Ring1, S: Ring1>() {
-    //
-}
+// pub fn hom<R: Ring1, S: Ring1>(s: S, r: R, images: []) {
+//
+// }
 
 pub struct Gens<const N: usize, R: Ring1>([R::Elem; N]);
 
@@ -104,11 +104,27 @@ macro_rules! gens {
 // pub trait DynRing {
 // }
 
+pub trait Ring2<const N: usize> {
+    type Elem: RingElem;
+}
+
+pub struct Hom2<S: Ring1, R: Ring1> {
+    //
+    ph: std::marker::PhantomData<(S, R)>,
+}
+
 // maybe hom should be parametrized by the
-fn hom1<const A: usize, const B: usize>(
-    a: [usize; A],
-    b: [usize; B],
-    images: [usize; B],
+fn hom2<
+    const A: usize,
+    const B: usize,
+    S: Ring2<A>,
+    R: Ring2<B>,
+>(
+    // a: [usize; A],
+    // b: [usize; B],
+    // images: [usize; B],
+    s: S,
+    r: R,
 ) {
     //
 }
