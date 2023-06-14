@@ -140,6 +140,11 @@ macro_rules! gens {
 
 pub trait Ring2<const N: usize>: Sized {
     type Elem: RingElem<N, Self>;
+
+    // returns a ring, potentially itself if not quotient
+    // fn base_ring(&self) ->
+    // fn ideal
+    // fn gens
 }
 
 pub trait NCRing<const N: usize> {

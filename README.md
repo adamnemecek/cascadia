@@ -30,6 +30,14 @@ poly!(ZZ(4), x, y, z);
 ```
 
 
+```rust
+trait Ring {
+    fn base_ring(&self) -> ...
+    fn ideal(&self) -> ...
+    fn gens(&self) -> ...
+}
+```
+
 # API Usage
 ```rust
 
@@ -78,3 +86,7 @@ macro_rules! matrix {
         }
     }
 } -->
+
+## groebner
+
+For noncommutative groebner reference that one ocaml package, there's also GAP and that one mathematica package from ucsd.
