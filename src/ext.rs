@@ -108,9 +108,26 @@ pub trait Ring2<const N: usize> {
     type Elem: RingElem;
 }
 
-pub struct Hom2<S: Ring1, R: Ring1> {
+pub struct Hom2<
+    const A: usize,
+    const B: usize,
+    S: Ring2<A>,
+    R: Ring2<B>,
+> {
     //
     ph: std::marker::PhantomData<(S, R)>,
+}
+
+impl<
+        const A: usize,
+        const B: usize,
+        S: Ring2<A>,
+        R: Ring2<B>,
+    > Hom2<A, B, S, R>
+{
+    pub fn new(s: S, r: R) -> Self {
+        Hom2 { ph: <_>::default() }
+    }
 }
 
 // maybe hom should be parametrized by the
@@ -125,8 +142,9 @@ fn hom2<
     // images: [usize; B],
     s: S,
     r: R,
-) {
+) -> Hom2<A, B, S, R> {
     //
+    Hom2 { ph: <_>::default() }
 }
 
 impl_div_rem!(usize);
