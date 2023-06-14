@@ -159,6 +159,7 @@ pub trait NCRing<const N: usize> {
     type Elem;
 }
 
+// from S -> R
 pub struct Hom2<
     const A: usize,
     const B: usize,
@@ -184,6 +185,10 @@ impl<
             codomain: r,
             ph: <_>::default(),
         }
+    }
+
+    fn get(&self, el: R::Elem) -> S::Elem {
+        unimplemented!()
     }
 }
 
