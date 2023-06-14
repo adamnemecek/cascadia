@@ -159,6 +159,8 @@ pub trait NCRing<const N: usize> {
     type Elem;
 }
 
+// A ring element i guess has a position
+
 // from S -> R
 pub struct Hom2<
     const A: usize,
@@ -169,6 +171,7 @@ pub struct Hom2<
     domain: S,
     codomain: R,
     //
+    images: [Expr<B, R>; B],
     ph: std::marker::PhantomData<(S, R)>,
 }
 
@@ -179,10 +182,15 @@ impl<
         R: Ring2<B>,
     > Hom2<A, B, S, R>
 {
-    pub fn new(s: S, r: R) -> Self {
+    pub fn new(
+        s: S,
+        r: R,
+        images: [Expr<B, R>; B],
+    ) -> Self {
         Self {
             domain: s,
             codomain: r,
+            images,
             ph: <_>::default(),
         }
     }
@@ -209,7 +217,7 @@ fn hom2<
     images: [Expr<B, R>; B],
 ) -> Hom2<A, B, S, R> {
     //
-    Hom2::new(s, r)
+    Hom2::new(s, r, images)
 }
 
 impl_div_rem!(usize);

@@ -59,6 +59,7 @@ let (S, [a, b, c]) = poly!(ZZ, a, b, c);
 let f = hom(S, R, [x^2, x*y, y^2]);
 
 
+assert!(f[c] == x * y)
 
 hom()
 
