@@ -73,6 +73,10 @@ fn poly<R: Ring1, const N: usize>(
 
 struct ZZ {}
 
+pub trait RingElem {
+    //add, mul etc
+}
+
 impl Ring1 for ZZ {
     //
     type Elem = usize;
@@ -90,11 +94,15 @@ pub struct Gens<const N: usize, R: Ring1>([R::Elem; N]);
 
 // FromIterator<term::Term<Exponent, BaseRing>>
 
+// inspired by the matrix macro
 macro_rules! gens {
     () => {
         //
     };
 }
+
+// pub trait DynRing {
+// }
 
 // maybe hom should be parametrized by the
 fn hom1<const A: usize, const B: usize>(
