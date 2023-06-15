@@ -73,7 +73,7 @@ pub trait RingElem<const N: usize, R: Ring2<N>>:
 pub enum Expr<const N: usize, R: Ring2<N>> {
     Leaf(R::Elem),
     Add(Box<Self>, Box<Self>),
-    // Add(R::Elem, R::Elem),
+    Sub(Box<Self>, Box<Self>),
     // Sub(Self, Self),
     // Times(R::Elem, R::Elem),
     Power(Box<Self>, usize),
@@ -97,6 +97,15 @@ impl<const N: usize, R: Ring2<N>> std::ops::Add
     type Output = Self;
     fn add(self, rhs: Self) -> Self {
         Self::Add(self.into(), rhs.into())
+    }
+}
+
+impl<const N: usize, R: Ring2<N>> std::ops::Sub
+    for Expr<N, R>
+{
+    type Output = Self;
+    fn sub(self, rhs: Self) -> Self {
+        Self::Sub(self.into(), rhs.into())
     }
 }
 
@@ -143,6 +152,29 @@ macro_rules! gens {
 
 // pub trait DynRing {
 // }
+
+// (- $(t:tt)*) => { ... };
+macro_rules! expr {
+    ($left:tt ^ $right:tt) => {
+        //
+    };
+    ($left:tt * $right:tt) => {
+        //
+    };
+    ($left:tt / $right:tt) => {
+        //
+    };
+    ($left:tt + $right:tt) => {
+        //
+    };
+    ($left:tt - $right:tt) => {
+        //
+    };
+}
+
+fn test1() {
+    expr!(a - b);
+}
 
 pub trait Ring2<const N: usize>: Sized {
     type Elem: RingElem<N, Self>;
