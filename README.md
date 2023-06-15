@@ -1,4 +1,7 @@
-# commutative rings
+# algea
+
+Rust crate for algebra.
+
 
 Port of https://github.com/KlausC/CommutativeRings
 
@@ -13,6 +16,9 @@ This crate relies on macros quite a bit for it's API.
 
 The api is inspired by oscar.jl, singular, gap, 
 
+https://github.com/ulthiel/CoxeterGroups.jl/tree/master/src
+
+Dentriform algbera
 
 ```macaulay2
 R = ZZ[x,y];
