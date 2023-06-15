@@ -26,13 +26,23 @@ pub enum Expr1 {
 //     }
 // }
 
-// (- $(t:tt)*) => { ... };
-macro_rules! expr {
-    ($left:tt ^ $right:tt) => {
-        Expr1::Power(
+macro_rules! binop {
+    ($op: tt, $left: tt, $right: tt) => {
+        Expr1::$op(
             expr!($left).into(),
             expr!($right).into(),
         )
+    };
+}
+
+// (- $(t:tt)*) => { ... };
+macro_rules! expr {
+    ($left:tt ^ $right:tt) => {
+        binop!(Power, $left, $right)
+        // Expr1::Power(
+        //     expr!($left).into(),
+        //     expr!($right).into(),
+        // )
     };
     ($left:tt * $right:tt) => {
         Expr1::Mul(
@@ -64,7 +74,9 @@ macro_rules! expr {
     };
 }
 
-fn test1() {}
+fn test1() {
+    //
+}
 
 mod tests {
     use super::Expr1;
