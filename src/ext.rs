@@ -70,15 +70,6 @@ pub trait RingElem<const N: usize, R: Ring2<N>>:
     //add, mul etc
 }
 
-pub enum Expr<const N: usize, R: Ring2<N>> {
-    Leaf(R::Elem),
-    Add(Box<Self>, Box<Self>),
-    Sub(Box<Self>, Box<Self>),
-    // Sub(Self, Self),
-    // Times(R::Elem, R::Elem),
-    Power(Box<Self>, usize),
-}
-
 macro_rules! expr {
     () => {
         //
@@ -88,24 +79,6 @@ macro_rules! expr {
 impl<const N: usize, R: Ring2<N>> Expr<N, R> {
     fn eval(self) {
         //
-    }
-}
-
-impl<const N: usize, R: Ring2<N>> std::ops::Add
-    for Expr<N, R>
-{
-    type Output = Self;
-    fn add(self, rhs: Self) -> Self {
-        Self::Add(self.into(), rhs.into())
-    }
-}
-
-impl<const N: usize, R: Ring2<N>> std::ops::Sub
-    for Expr<N, R>
-{
-    type Output = Self;
-    fn sub(self, rhs: Self) -> Self {
-        Self::Sub(self.into(), rhs.into())
     }
 }
 
@@ -153,10 +126,51 @@ macro_rules! gens {
 // pub trait DynRing {
 // }
 
+pub enum Expr<const N: usize, R: Ring2<N>> {
+    Leaf(R::Elem),
+    Add(Box<Self>, Box<Self>),
+    Sub(Box<Self>, Box<Self>),
+    // Sub(Self, Self),
+    Mul(Box<Self>, Box<Self>),
+    Div(Box<Self>, Box<Self>),
+    Power(Box<Self>, usize),
+}
+
+pub enum Expr1 {
+    Leaf(usize),
+    Add(Box<Self>, Box<Self>),
+    Sub(Box<Self>, Box<Self>),
+    // Sub(Self, Self),
+    Mul(Box<Self>, Box<Self>),
+    Div(Box<Self>, Box<Self>),
+    Power(Box<Self>, Box<Self>),
+}
+
+// impl<const N: usize, R: Ring2<N>> std::ops::Add
+//     for Expr<N, R>
+// {
+//     type Output = Self;
+//     fn add(self, rhs: Self) -> Self {
+//         Self::Add(self.into(), rhs.into())
+//     }
+// }
+
+// impl<const N: usize, R: Ring2<N>> std::ops::Sub
+//     for Expr<N, R>
+// {
+//     type Output = Self;
+//     fn sub(self, rhs: Self) -> Self {
+//         Self::Sub(self.into(), rhs.into())
+//     }
+// }
+
 // (- $(t:tt)*) => { ... };
 macro_rules! expr {
     ($left:tt ^ $right:tt) => {
-        //
+        Expr1::Power(
+            expr!($left).into(),
+            expr!($right).into(),
+        )
     };
     ($left:tt * $right:tt) => {
         //
@@ -170,10 +184,14 @@ macro_rules! expr {
     ($left:tt - $right:tt) => {
         //
     };
+
+    ($v: tt) => {
+        Expr1::Leaf($v)
+    };
 }
 
 fn test1() {
-    expr!(a - b);
+    expr!(10 ^ 10);
 }
 
 pub trait Ring2<const N: usize>: Sized {
