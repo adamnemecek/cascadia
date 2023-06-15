@@ -1,3 +1,4 @@
+#[derive(Debug)]
 pub enum Expr1 {
     Leaf(usize),
     Add(Box<Self>, Box<Self>),
@@ -34,16 +35,28 @@ macro_rules! expr {
         )
     };
     ($left:tt * $right:tt) => {
-        //
+        Expr1::Mul(
+            expr!($left).into(),
+            expr!($right).into(),
+        )
     };
     ($left:tt / $right:tt) => {
-        //
+        Expr1::Div(
+            expr!($left).into(),
+            expr!($right).into(),
+        )
     };
     ($left:tt + $right:tt) => {
-        //
+        Expr1::Add(
+            expr!($left).into(),
+            expr!($right).into(),
+        )
     };
     ($left:tt - $right:tt) => {
-        //
+        Expr1::Sub(
+            expr!($left).into(),
+            expr!($right).into(),
+        )
     };
 
     ($v: tt) => {
@@ -51,6 +64,14 @@ macro_rules! expr {
     };
 }
 
-fn test1() {
-    expr!(10 ^ 10);
+fn test1() {}
+
+mod tests {
+    use super::Expr1;
+
+    #[test]
+    fn test_expr_parser() {
+        let a = expr!(10 ^ 10);
+        println!("{:?}", a);
+    }
 }

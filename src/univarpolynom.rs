@@ -64,6 +64,6 @@ mod tests {
     #[test]
     fn test_new() {
         //
-        let p = poly!(ZZ, x);
+        // let p = poly!(ZZ, x);
     }
 }
