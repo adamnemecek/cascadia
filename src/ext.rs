@@ -76,7 +76,7 @@ pub enum Expr<const N: usize, R: Ring2<N>> {
     // Add(R::Elem, R::Elem),
     // Sub(Self, Self),
     // Times(R::Elem, R::Elem),
-    // Power(R::Elem, usize),
+    Power(Box<Self>, usize),
 }
 
 macro_rules! expr {

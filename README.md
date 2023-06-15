@@ -30,6 +30,16 @@ poly!(ZZ(4), x, y, z);
 
 
 ```
+```
+ZZPolyRingElem
+  coeffs: Ptr{Nothing} @0x00006000021a3610
+  alloc: Int64 2
+  length: Int64 2
+  parent: ZZPolyRing
+    S: Symbol x
+    __attrs: #undef
+    ```
+
 I wonder if i can like have a polynomial parametrized by ZZ or one that takes a ZZ as value.
 
 ```rust
