@@ -39,34 +39,18 @@ macro_rules! binop {
 macro_rules! expr {
     ($left:tt ^ $right:tt) => {
         binop!(Power, $left, $right)
-        // Expr1::Power(
-        //     expr!($left).into(),
-        //     expr!($right).into(),
-        // )
     };
     ($left:tt * $right:tt) => {
-        Expr1::Mul(
-            expr!($left).into(),
-            expr!($right).into(),
-        )
+        binop!(Mul, $left, $right)
     };
     ($left:tt / $right:tt) => {
-        Expr1::Div(
-            expr!($left).into(),
-            expr!($right).into(),
-        )
+        binop!(Div, $left, $right)
     };
     ($left:tt + $right:tt) => {
-        Expr1::Add(
-            expr!($left).into(),
-            expr!($right).into(),
-        )
+        binop!(Add, $left, $right)
     };
     ($left:tt - $right:tt) => {
-        Expr1::Sub(
-            expr!($left).into(),
-            expr!($right).into(),
-        )
+        binop!(Sub, $left, $right)
     };
 
     ($v: tt) => {
