@@ -8,7 +8,13 @@ Features:
     * coxeter groups
     * tree algebras
 
+
+
 The API is heavily inspired by Oscar.jl.
+
+Other inspirations include 
+* [sympycore]()
+* [bruhat](https://github.com/punkdit/bruhat)
 
 
 Port of https://github.com/KlausC/CommutativeRings

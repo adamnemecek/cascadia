@@ -17,6 +17,7 @@ mod qq;
 mod quotient;
 mod rationalcanonical;
 mod resultant;
+mod ring;
 mod ringtypes;
 mod specialseries;
 mod typevars;
@@ -45,6 +46,7 @@ pub mod prelude {
         quotient::*,
         rationalcanonical::*,
         resultant::*,
+        ring::*,
         ringtypes::*,
         specialseries::*,
         typevars::*,

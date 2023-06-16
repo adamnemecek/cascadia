@@ -19,11 +19,11 @@ pub trait Ring3<const N: usize, E: Ring3Elem<N, Self>>:
 {
 }
 
-// fn a<const N: usize, R: Ring3<N, E>, E: Ring3Elem<N, R>>(
-//     a: R,
-// ) {
-//     //
-// }
+fn a<const N: usize, R: Ring3<N, E>, E: Ring3Elem<N, R>>(
+    a: R,
+) {
+    //
+}
 
 pub trait Inv {
     type Output;
