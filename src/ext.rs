@@ -1,15 +1,23 @@
-pub trait NCRing3Elem<const N: usize, R: NCRing3<N>> {
+pub trait NCRing3Elem<const N: usize, R: NCRing3<N, Self>>:
+    Sized
+{
     //
 }
-pub trait NCRing3<const N: usize>: Sized {
-    type Elem: NCRing3Elem<N, Self>;
+pub trait NCRing3<const N: usize, E: NCRing3Elem<N, Self>>:
+    Sized
+{
+    // type Elem: NCRing3Elem<N, Self>;
 }
 
-pub trait Ring3Elem<const N: usize, R: Ring3<N>> {
+pub trait Ring3Elem<const N: usize, R: Ring3<N, Self>>:
+    NCRing3Elem<N, R>
+{
     //
 }
-pub trait Ring3<const N: usize>: Sized {
-    type Elem: Ring3Elem<N, Self>;
+pub trait Ring3<const N: usize, E: Ring3Elem<N, Self>>:
+    NCRing3<N, E>
+{
+    // type Elem: Ring3Elem<N, Self>;
 }
 
 pub trait Inv {
