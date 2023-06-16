@@ -2,6 +2,14 @@
 
 Rust crate for algebra.
 
+Features:
+    * abstract algebra
+    * commutative algbera
+    * coxeter groups
+    * tree algebras
+
+The API is heavily inspired by Oscar.jl.
+
 
 Port of https://github.com/KlausC/CommutativeRings
 
@@ -71,7 +79,7 @@ let (S, [a, b, c]) = poly!(ZZ, a, b, c);
 
 // note that the S has three elements, same 
 
-// the question is what does the hom funciton take? they are not Ring::Elem per se, since 
+// the question is what does the hom funciton take? they are not Ring::Elem per se, they might be expresions
 let f = hom(S, R, [x^2, x*y, y^2]);
 
 

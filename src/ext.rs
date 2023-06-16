@@ -1,3 +1,17 @@
+pub trait NCRing3Elem<const N: usize, R: NCRing3<N>> {
+    //
+}
+pub trait NCRing3<const N: usize>: Sized {
+    type Elem: NCRing3Elem<N, Self>;
+}
+
+pub trait Ring3Elem<const N: usize, R: Ring3<N>> {
+    //
+}
+pub trait Ring3<const N: usize>: Sized {
+    type Elem: Ring3Elem<N, Self>;
+}
+
 pub trait Inv {
     type Output;
     fn inv(&self) -> Self::Output;
@@ -95,9 +109,10 @@ impl Ring1 for ZZ {
     type Elem = usize;
 }
 
-fn poly<R: Ring1, const N: usize>(
+// creates a polynomial ring over ring R with the symbols
+pub fn poly<R: Ring1, const N: usize>(
     r: R,
-    a: [&str; N],
+    symbols: [&str; N],
 ) -> (usize, [R::Elem; N]) {
     //
     // [0; N]
@@ -149,6 +164,17 @@ pub trait Ring2<const N: usize>: Sized {
 pub trait NCRing<const N: usize> {
     //
     type Elem;
+}
+
+// D = degree
+// N = ring gens
+pub struct PolyRing<
+    const D: usize,
+    const N: usize,
+    R: Ring2<N>,
+> {
+    ring: R,
+    // coeffs: []
 }
 
 // A ring element i guess has a position
