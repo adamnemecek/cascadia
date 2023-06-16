@@ -9,6 +9,8 @@ Features:
     * tree algebras
 
 
+* promoting
+
 
 The API is heavily inspired by Oscar.jl.
 
@@ -68,6 +70,7 @@ trait Ring {
     fn ideal(&self) -> ...
     fn gens(&self) -> ...
     fn coeffs(&self) -> ...
+    fn ambient(&self) -> ...
 }
 ```
 

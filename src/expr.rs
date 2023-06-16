@@ -1,5 +1,7 @@
 // https://stackoverflow.com/questions/36721733/is-there-a-way-to-pattern-match-infix-operations-with-precedence-in-rust-macros
 
+use crate::prelude::*;
+
 #[derive(Debug)]
 pub enum Expr1 {
     Leaf(usize),

@@ -1,29 +1,4 @@
 // inspired by abstractalgebra.jl
-pub trait NCRing3Elem<const N: usize, R: NCRing3<N, Self>>:
-    Sized
-{
-    //
-}
-pub trait NCRing3<const N: usize, E: NCRing3Elem<N, Self>>:
-    Sized
-{
-    // fn base_ring(&self) ->
-}
-
-pub trait Ring3Elem<const N: usize, R: Ring3<N, Self>>:
-    NCRing3Elem<N, R>
-{
-}
-pub trait Ring3<const N: usize, E: Ring3Elem<N, Self>>:
-    NCRing3<N, E>
-{
-}
-
-fn a<const N: usize, R: Ring3<N, E>, E: Ring3Elem<N, R>>(
-    a: R,
-) {
-    //
-}
 
 pub trait Inv {
     type Output;
@@ -161,7 +136,16 @@ pub enum Expr<const N: usize, R: Ring2<N>> {
     // Sub(Self, Self),
     Mul(Box<Self>, Box<Self>),
     Div(Box<Self>, Box<Self>),
-    Power(Box<Self>, usize),
+    Power(Box<Self>, Box<Self>),
+}
+
+impl<const N: usize, R: Ring2<N>> Expr<N, R> {
+    fn map<const M: usize, S: Ring2<M>>(
+        self,
+        f: impl Fn(R::Elem) -> S::Elem,
+    ) -> Expr<M, S> {
+        unimplemented!()
+    }
 }
 
 pub trait Ring2<const N: usize>: Sized {
@@ -229,6 +213,8 @@ impl<
     fn get(&self, el: R::Elem) -> S::Elem {
         unimplemented!()
     }
+
+    // pub fn
 }
 
 // maybe hom should be parametrized by the

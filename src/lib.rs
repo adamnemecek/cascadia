@@ -6,6 +6,7 @@ mod factorization;
 mod fraction;
 mod galoisfields;
 mod generic;
+mod hom;
 mod ideal;
 mod intfactorization;
 mod linearalgebra;
@@ -35,6 +36,7 @@ pub mod prelude {
         fraction::*,
         galoisfields::*,
         generic::*,
+        hom::*,
         ideal::*,
         intfactorization::*,
         linearalgebra::*,
