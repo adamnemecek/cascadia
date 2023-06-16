@@ -154,15 +154,19 @@ impl<const N: usize, R: Ring2<N>> Expr<N, R> {
                 l.map(f.clone()).into(),
                 r.map(f).into(),
             ),
-
             Self::Mul(l, r) => Expr::Mul(
                 l.map(f.clone()).into(),
                 r.map(f).into(),
             ),
-
-            _ => unimplemented!(),
+            Self::Div(l, r) => Expr::Div(
+                l.map(f.clone()).into(),
+                r.map(f).into(),
+            ),
+            Self::Power(l, r) => Expr::Power(
+                l.map(f.clone()).into(),
+                r.map(f).into(),
+            ),
         }
-        // unimplemented!()
     }
 }
 
