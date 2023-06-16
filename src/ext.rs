@@ -142,9 +142,27 @@ pub enum Expr<const N: usize, R: Ring2<N>> {
 impl<const N: usize, R: Ring2<N>> Expr<N, R> {
     fn map<const M: usize, S: Ring2<M>>(
         self,
-        f: impl Fn(R::Elem) -> S::Elem,
+        f: impl Fn(R::Elem) -> S::Elem + Clone,
     ) -> Expr<M, S> {
-        unimplemented!()
+        match self {
+            Self::Leaf(e) => Expr::Leaf(f(e)),
+            Self::Add(l, r) => Expr::Add(
+                l.map(f.clone()).into(),
+                r.map(f).into(),
+            ),
+            Self::Sub(l, r) => Expr::Sub(
+                l.map(f.clone()).into(),
+                r.map(f).into(),
+            ),
+
+            Self::Mul(l, r) => Expr::Mul(
+                l.map(f.clone()).into(),
+                r.map(f).into(),
+            ),
+
+            _ => unimplemented!(),
+        }
+        // unimplemented!()
     }
 }
 
