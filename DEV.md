@@ -1,4 +1,4 @@
-# dev
+# casc
 
 Implementation details of the thing
 
@@ -34,3 +34,8 @@ Maybe I can use a bitset for the
 * no i probably need an expresison
 
 the trick heere is that 
+
+
+# mpoly
+
+* what will happen if i keep the terms around and just multiply it 
