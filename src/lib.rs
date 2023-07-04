@@ -21,6 +21,7 @@ mod resultant;
 mod ring;
 mod ringtypes;
 mod specialseries;
+mod term;
 mod typevars;
 mod univarpolynom;
 mod zz;
@@ -51,6 +52,7 @@ pub mod prelude {
         ring::*,
         ringtypes::*,
         specialseries::*,
+        term::*,
         typevars::*,
         univarpolynom::*,
         zz::*,

@@ -1,15 +1,23 @@
-# algea
+# cascasia
 
-Rust crate for algebra.
+Rust crate for algebra
 
 Features:
     * abstract algebra
     * commutative algbera
+    * noncommutative algbera
     * coxeter groups
     * tree algebras
+    * free algbera
+    * combinatorics
+    * matroids
+    * vertex operator algebra
+    * tutte polynomial
+    * hecke algebra
+        * https://github.com/sagemath/sage/blob/3230f00aeb49802f99b0a3b76e770fa9d628c4e1/src/sage/algebras/iwahori_hecke_algebra.py#L122
 
+* symdpoly in scala
 
-* promoting
 
 
 The API is heavily inspired by Oscar.jl.
