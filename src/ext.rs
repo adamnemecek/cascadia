@@ -276,7 +276,10 @@ pub trait Ring4 {
 //     // ph: std::marker::PhantomData<(R, C)>
 // }
 
-struct Images<const N: usize> {}
+struct Images<R: Ring4, const N: usize> {
+    //
+    p: std::marker::PhantomData<R>,
+}
 
 fn map<
     R: Ring4 + FreeModule,
@@ -285,7 +288,7 @@ fn map<
 >(
     r: R,
     s: S,
-    m: Images<I>,
+    m: Images<R, I>,
 ) {
     unimplemented!()
 }
