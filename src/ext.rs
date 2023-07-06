@@ -267,8 +267,16 @@ impl_div_rem!(u32);
 
 pub trait FreeModule {}
 
-pub trait Ring4 {
+// ZZ, QQ
+// #[derive(Clone, Copy, PartialEq, Eq)]
+pub trait CoefficientRing: Eq {
+    //
+}
+
+pub trait Ring4<CF: CoefficientRing> {
     fn numgens(&self) -> usize;
+
+    // fn coefficient_ring(&self) -> CoeffRing;
 }
 
 // struct Matrix<const R: usize, const C: usize> {
@@ -276,20 +284,29 @@ pub trait Ring4 {
 //     // ph: std::marker::PhantomData<(R, C)>
 // }
 
-struct Images<R: Ring4, const N: usize> {
+struct Images<
+    CF: CoefficientRing,
+    R: Ring4<CF>,
+    const N: usize,
+> {
     //
-    p: std::marker::PhantomData<R>,
+    p: std::marker::PhantomData<(CF, R)>,
 }
 
 fn map<
-    R: Ring4 + FreeModule,
-    S: Ring4 + FreeModule,
+    CF: CoefficientRing,
+    R: Ring4<CF> + FreeModule,
+    S: Ring4<CF> + FreeModule,
     const I: usize,
 >(
     r: R,
     s: S,
-    m: Images<R, I>,
+    m: Images<CF, R, I>,
 ) {
+    // m.
+    // if m.ring() == r.coefficient_ring() {
+    //
+    // }
     unimplemented!()
 }
 
