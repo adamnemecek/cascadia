@@ -8,6 +8,7 @@ Features:
     * noncommutative algbera
     * coxeter groups
     * tree algebras
+        * dentriform.jl
     * free algbera
     * combinatorics
     * matroids
@@ -15,6 +16,7 @@ Features:
     * tutte polynomial
     * hecke algebra
         * https://github.com/sagemath/sage/blob/3230f00aeb49802f99b0a3b76e770fa9d628c4e1/src/sage/algebras/iwahori_hecke_algebra.py#L122
+    * 
 
 * symdpoly in scala
 
@@ -42,12 +44,14 @@ The api is inspired by oscar.jl, singular, gap,
 
 https://github.com/ulthiel/CoxeterGroups.jl/tree/master/src
 
-Dentriform algbera
+Dentriform algebra
 
 ```macaulay2
 R = ZZ[x,y];
 S = ZZ[a,b,c];
-f = map(R,S,{x^2,x*y,y^2}) // note that macaulay flips the order of things
+f = map(R,S,{x^2,x*y,y^2})      # note that macaulay flips the order of things
+f a                             # => x^2
+f (a * b)                       # => x^3 y
 ```
 
 I guess one option for the api do distinguish ZZ from ZZ(5) is providing a default implementation for the ZZ

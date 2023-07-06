@@ -265,6 +265,31 @@ impl_div_rem!(u8);
 impl_div_rem!(u16);
 impl_div_rem!(u32);
 
+pub trait FreeModule {}
+
+pub trait Ring4 {
+    fn numgens(&self) -> usize;
+}
+
+// struct Matrix<const R: usize, const C: usize> {
+//     inner: Vec<f64>,
+//     // ph: std::marker::PhantomData<(R, C)>
+// }
+
+struct Images<const N: usize> {}
+
+fn map<
+    R: Ring4 + FreeModule,
+    S: Ring4 + FreeModule,
+    const I: usize,
+>(
+    r: R,
+    s: S,
+    m: Images<I>,
+) {
+    unimplemented!()
+}
+
 pub fn gcd(a: usize, b: usize) -> usize {
     if b.is_zero() {
         return a;

@@ -29,3 +29,11 @@ impl std::ops::Mul for MPoly {
         unimplemented!()
     }
 }
+
+mod test {
+    #[test]
+    fn test1() {
+        //
+        // let a = x + x^2 + y;
+    }
+}

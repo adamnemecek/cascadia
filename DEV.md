@@ -1,4 +1,7 @@
-# casc
+# cascadia
+
+## implement
+
 
 Implementation details of the thing
 
@@ -9,7 +12,9 @@ The difference is how the linear combinations combine.
 
 # Ring hom
 
+https://github.com/gap-system/gap/blob/851dbd96a51db582ee0322b72ff28e4cf1d8d9e4/lib/ringhom.gi#L34
 
+* sseq has an free module implementation with iamges
 
 I guess the the trick is that like you decompose the tree until you read the leaf at which point you 
 
@@ -18,7 +23,7 @@ I guess the the trick is that like you decompose the tree until you read the lea
 
 * ring hom implementation
 
-has a matrix
+m2 has a matrix
 
 * how about instead of expresison I have a linear combination?
 
@@ -39,3 +44,4 @@ the trick heere is that
 # mpoly
 
 * what will happen if i keep the terms around and just multiply it 
+* look at symbolica
