@@ -47,8 +47,8 @@ map(Ring,Ring,Matrix) := RingMap => opts -> (R,S,m) -> (
       )
      else (
         -- what does this do?
-      try m = promote(m,R) else
-        error "map: expected a matrix over the target ring, or promotable to it";
+      	try m = promote(m,R) else
+        	error "map: expected a matrix over the target ring, or promotable to it";
       );
       -- rank target m == 1
      if rank target m != 1
@@ -70,6 +70,8 @@ map(Ring,Ring,Matrix) := RingMap => opts -> (R,S,m) -> (
            degmap0 degreeLength R));
      dR := ZZ^(degreeLength R);
      dS := ZZ^(degreeLength S);
+	 -- ok this is the thing executed
+	 -- last arg is list
      degmapmatrix := map(dR,dS,transpose apply(entries id_dS,degmap));
      deglift := (
       if opts.DegreeLift =!= null then opts.DegreeLift
@@ -404,6 +406,7 @@ sub2 = (S,R,v) -> (                   -- S is the target ring or might be null, 
      f := if S === null then matrix{toList m} else matrix(S,{toList m});
      map(ring f,R,f))
 
+-- this gets called
 map(Ring,Ring,List) := RingMap => opts -> (S,R,m) -> (
      if #m>0 and all(m, o -> class o === Option) then sub2(S,R,m)
      else map(S,R,matrix(S,{m}),opts)
