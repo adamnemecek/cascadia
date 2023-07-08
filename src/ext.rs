@@ -272,10 +272,15 @@ pub trait FreeModule {}
 pub trait CoefficientRing: Eq {
     //
 }
+pub struct Generator {
+    //
+}
 
 pub trait Ring4<CF: CoefficientRing> {
     fn numgens(&self) -> usize;
 
+    fn generators(&self) -> &[Generator];
+    // fn base_ring(&self)
     // fn coefficient_ring(&self) -> CoeffRing;
 }
 
@@ -291,6 +296,15 @@ struct Images<
 > {
     //
     p: std::marker::PhantomData<(CF, R)>,
+}
+
+fn sub2<CF: CoefficientRing, R: Ring4<CF>, S: Ring4<CF>>(
+    s: S,
+    r: R,
+    v: usize,
+) {
+    let g = r.generators();
+    //
 }
 
 fn map<
