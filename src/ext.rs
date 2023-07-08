@@ -304,6 +304,13 @@ fn sub2<CF: CoefficientRing, R: Ring4<CF>, S: Ring4<CF>>(
     v: usize,
 ) {
     let g = r.generators();
+    // let g = g.iter().chain(other).collect();
+    // let h = (0..g.len())
+    //     .map(|n| {
+    //         //
+    //     })
+    //     .collect();
+    // let mut h =
     //
 }
 
