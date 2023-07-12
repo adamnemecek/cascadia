@@ -56,8 +56,16 @@ pub fn gamma(x: f64) -> f64 {
 }
 
 mod tests {
+    use super::*;
+
     #[test]
     fn test_gamma() {
         //
+        let z = 0.6;
+        let lhs = gamma(z) * gamma(1.0 - z);
+        let rhs = std::f64::consts::PI
+            / (std::f64::consts::PI * z).sin();
+        println!("{}", lhs);
+        println!("{}", rhs);
     }
 }

@@ -147,6 +147,10 @@ fn find_x(
     unimplemented!()
 }
 
+fn find_hyperplane(f: impl Fn(f64) -> f64) {
+    //
+}
+
 // fn test_shift() {
 //     // exp(t * d/dx) * f(x) = f(x + t)
 //     // shift(f, 3.0);

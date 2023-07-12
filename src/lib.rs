@@ -1,6 +1,7 @@
 #![feature(type_alias_impl_trait)]
 
 mod determinant;
+mod dual;
 mod enumerations;
 mod expr;
 mod ext;
@@ -11,8 +12,10 @@ mod gamma;
 mod generic;
 mod hom;
 mod ideal;
+mod incidence;
 mod intfactorization;
 mod linearalgebra;
+mod mobius;
 mod multivarpolynom;
 mod numbertheoretical;
 mod powerseries;
@@ -26,6 +29,7 @@ mod ringtypes;
 mod shift;
 mod specialseries;
 mod symbol;
+mod taylor;
 mod term;
 mod typevars;
 mod univarpolynom;
@@ -35,6 +39,7 @@ mod zzmod;
 pub mod prelude {
     pub use crate::{
         determinant::*,
+        dual::*,
         enumerations::*,
         expr::*,
         ext::*,
@@ -44,8 +49,10 @@ pub mod prelude {
         generic::*,
         hom::*,
         ideal::*,
+        incidence::*,
         intfactorization::*,
         linearalgebra::*,
+        mobius::*,
         multivarpolynom::*,
         numbertheoretical::*,
         powerseries::*,
@@ -58,6 +65,7 @@ pub mod prelude {
         ringtypes::*,
         specialseries::*,
         symbol::*,
+        taylor::*,
         term::*,
         typevars::*,
         univarpolynom::*,
