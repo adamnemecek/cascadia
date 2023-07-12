@@ -1,5 +1,6 @@
 #![feature(type_alias_impl_trait)]
 
+mod coxeter;
 mod determinant;
 mod dual;
 mod enumerations;
@@ -14,6 +15,7 @@ mod hom;
 mod ideal;
 mod incidence;
 mod intfactorization;
+mod iwahori_hecke;
 mod linearalgebra;
 mod mobius;
 mod multivarpolynom;
@@ -31,6 +33,7 @@ mod specialseries;
 mod symbol;
 mod taylor;
 mod term;
+mod toeplitz;
 mod typevars;
 mod univarpolynom;
 mod zz;
@@ -38,6 +41,7 @@ mod zzmod;
 
 pub mod prelude {
     pub use crate::{
+        coxeter::*,
         determinant::*,
         dual::*,
         enumerations::*,
@@ -51,6 +55,7 @@ pub mod prelude {
         ideal::*,
         incidence::*,
         intfactorization::*,
+        iwahori_hecke::*,
         linearalgebra::*,
         mobius::*,
         multivarpolynom::*,
@@ -67,6 +72,7 @@ pub mod prelude {
         symbol::*,
         taylor::*,
         term::*,
+        toeplitz::*,
         typevars::*,
         univarpolynom::*,
         zz::*,
