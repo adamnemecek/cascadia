@@ -2,6 +2,7 @@ fn f(x: f64) -> f64 {
     x + 2.0
 }
 
+// shift operator is uncurring
 fn shift<T: Copy + std::ops::Add<Output = T>>(
     f: impl Fn(T) -> T + Clone,
     t: T,
@@ -40,9 +41,9 @@ fn test_shift1(
     let rhs = s(x);
     println!("{} {}", fx, rhs);
     let ddx = (rhs / fx).ln() / t;
-    let lhs = (t * ddx).exp();
-    println!("result {lhs} {rhs}");
-    lhs == rhs
+    let action = (t * ddx).exp();
+    println!("result {action} {rhs}");
+    fx * action == rhs
 }
 
 fn test_shift() {
