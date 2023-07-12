@@ -3,12 +3,27 @@ fn f(x: f64) -> f64 {
     x + 2.0 * x + x.powf(4.0) + 5.0
 }
 
+fn op<T: Copy>(
+    f: impl Fn(T) -> T + Clone,
+    t: T,
+    op: impl Fn(T, T) -> T,
+) -> impl Fn(T) -> T {
+    move |x| f.clone()(op(x, t))
+}
+
 // shift operator is uncurring
-fn shift<T: Copy + std::ops::Add<Output = T>>(
+fn left_shift<T: Copy + std::ops::Add<Output = T>>(
     f: impl Fn(T) -> T + Clone,
     t: T,
 ) -> impl Fn(T) -> T {
-    move |x| f.clone()(x + t)
+    op(f, t, T::add)
+}
+
+fn right_shift<T: Copy + std::ops::Sub<Output = T>>(
+    f: impl Fn(T) -> T + Clone,
+    t: T,
+) -> impl Fn(T) -> T {
+    op(f, t, T::sub)
 }
 
 fn exp_shift(t: f64, ddx: bool) {
@@ -44,7 +59,7 @@ fn test_shift1(
     x: f64,
     t: f64,
 ) -> f64 {
-    let s = shift(f.clone(), t);
+    let s = left_shift(f.clone(), t);
 
     let fx = f(x);
 
@@ -64,20 +79,31 @@ fn shift_op(
     x: f64,
     t: f64,
 ) -> f64 {
-    let s = shift(f.clone(), t);
+    let s = left_shift(f.clone(), t);
     s(x) / f(x)
 }
 
-fn test_shift() {
-    // exp(t * d/dx) * f(x) = f(x + t)
-    // shift(f, 3.0);
-    println!("{}", test_shift1(f, 2.0, 4.0));
+// given action, figured out by how much we have to shift
+fn unshift_op(
+    f: impl Clone + Fn(f64) -> f64,
+    x: f64,
+    action: f64,
+) -> f64 {
+    let fx = f(x);
+    let sx = fx / action;
+    unimplemented!()
 }
+
+// fn test_shift() {
+//     // exp(t * d/dx) * f(x) = f(x + t)
+//     // shift(f, 3.0);
+//     println!("{}", test_shift1(f, 3.0, 5.0));
+// }
 
 mod tests {
     use super::*;
     #[test]
     fn test_shift() {
-        println!("{}", test_shift1(f, 2.0, 4.0));
+        println!("{}", test_shift1(f, 3.0, 4.0));
     }
 }
