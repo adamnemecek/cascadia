@@ -42,7 +42,7 @@ fn test_shift1(
     f: impl Clone + Fn(f64) -> f64,
     x: f64,
     t: f64,
-) -> bool {
+) -> f64 {
     let s = shift(f.clone(), t);
 
     let fx = f(x);
@@ -52,8 +52,9 @@ fn test_shift1(
     let ddx = (rhs / fx).ln() / t;
     let action = (t * ddx).exp();
     let lhs = fx * action;
-    println!("result {lhs} {rhs}");
-    is_approx(lhs, rhs)
+    // println!("result {lhs} {rhs}");
+    assert!(is_approx(lhs, rhs));
+    action
 }
 
 fn test_shift() {
