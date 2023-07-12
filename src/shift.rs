@@ -38,6 +38,7 @@ fn div<A: Copy, B: std::ops::Div<Output = B>>(
     //
 }
 
+// we know t and want the action
 fn test_shift1(
     f: impl Clone + Fn(f64) -> f64,
     x: f64,
@@ -47,14 +48,24 @@ fn test_shift1(
 
     let fx = f(x);
 
-    let rhs = s(x);
-    println!("{} {}", fx, rhs);
-    let ddx = (rhs / fx).ln() / t;
+    let sx = s(x);
+    // println!("{} {}", fx, rhs);
+    let ddx = (sx / fx).ln() / t;
     let action = (t * ddx).exp();
+
     let lhs = fx * action;
     // println!("result {lhs} {rhs}");
-    assert!(is_approx(lhs, rhs));
+    assert!(is_approx(lhs, sx));
     action
+}
+
+fn shift_op(
+    f: impl Clone + Fn(f64) -> f64,
+    x: f64,
+    t: f64,
+) -> f64 {
+    let s = shift(f.clone(), t);
+    s(x) / f(x)
 }
 
 fn test_shift() {
