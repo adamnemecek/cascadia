@@ -48,9 +48,6 @@ impl<
 {
     type Output = impl Fn(T) -> T;
     fn shift(&self, t: T) -> Self::Output {
-        // move |x| (self.clone())(x + t)
-        // Box::new(move |x| self.clone()(x + t))
-        // unimplemented!()
         left_shift(self.clone(), t)
     }
 }
@@ -152,8 +149,10 @@ mod tests {
     use super::*;
     #[test]
     fn test_shift() {
-        let z = f.shift(3.0);
-        let z = f.shift(-3.0);
+        // let z = f.shift(3.0)(3.0);
+        // let z: f64 = f.shift(3.0)(3.0); // does not work
+        println!("{}", z);
+        // let z = f.shift(-3.0);
         println!("{}", left_shift_op(f, 3.0)(3.0));
         println!("{}", test_shift_op(f, 3.0, 3.0));
         println!(
