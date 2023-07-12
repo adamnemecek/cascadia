@@ -1,6 +1,6 @@
 fn f(x: f64) -> f64 {
     // 2.0 * x + 4.0
-    x + x.powf(3.0) + 5.0
+    x + 2.0 * x + x.powf(4.0) + 5.0
 }
 
 // shift operator is uncurring
@@ -30,6 +30,14 @@ fn is_approx(a: f64, b: f64) -> bool {
 //     }
 // }
 
+fn div<A: Copy, B: std::ops::Div<Output = B>>(
+    a: impl Fn(A) -> B,
+    b: impl Fn(A) -> B,
+) -> impl Fn(A) -> B {
+    move |x| a(x) / b(x)
+    //
+}
+
 fn test_shift1(
     f: impl Clone + Fn(f64) -> f64,
     x: f64,
@@ -43,8 +51,9 @@ fn test_shift1(
     println!("{} {}", fx, rhs);
     let ddx = (rhs / fx).ln() / t;
     let action = (t * ddx).exp();
-    println!("result {} {rhs}", fx * action);
-    is_approx(fx * action, rhs)
+    let lhs = fx * action;
+    println!("result {lhs} {rhs}");
+    is_approx(lhs, rhs)
 }
 
 fn test_shift() {
