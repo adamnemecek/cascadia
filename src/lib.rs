@@ -1,3 +1,5 @@
+#![feature(type_alias_impl_trait)]
+
 mod determinant;
 mod enumerations;
 mod expr;

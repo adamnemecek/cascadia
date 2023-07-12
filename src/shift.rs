@@ -36,16 +36,24 @@ fn is_approx(a: f64, b: f64) -> bool {
     (a - b).abs() < 0.01
 }
 
-// pub trait Shift<T> {
-//     fn shift(&self, t: T) -> Self;
-// }
+pub trait Shift<T> {
+    type Output;
+    fn shift(&self, t: T) -> Self::Output;
+}
 
-// impl<T, F: Fn(T) -> T + Clone> Shift<T> for Box<F> {
-//     fn shift(&self, t: T) -> Box<F> {
-//         // move |x| (self.clone())(x + t)
-//         Box::new(move |x| self.clone()(x + t))
-//     }
-// }
+impl<
+        T: Copy + std::ops::Add<Output = T>,
+        F: Fn(T) -> T + Clone,
+    > Shift<T> for F
+{
+    type Output = impl Fn(T) -> T;
+    fn shift(&self, t: T) -> Self::Output {
+        // move |x| (self.clone())(x + t)
+        // Box::new(move |x| self.clone()(x + t))
+        // unimplemented!()
+        left_shift(self.clone(), t)
+    }
+}
 
 // we know t and want the action
 fn test_shift_op(
@@ -121,8 +129,8 @@ fn find_t(
     t
 }
 
-///
-///
+///t
+///trait
 ///
 fn find_x(
     f: impl Clone + Fn(f64) -> f64,
@@ -144,6 +152,8 @@ mod tests {
     use super::*;
     #[test]
     fn test_shift() {
+        let z = f.shift(3.0);
+        let z = f.shift(-3.0);
         println!("{}", left_shift_op(f, 3.0)(3.0));
         println!("{}", test_shift_op(f, 3.0, 3.0));
         println!(
