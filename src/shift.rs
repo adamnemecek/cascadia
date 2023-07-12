@@ -11,7 +11,9 @@ pub fn op<T: Copy>(
     move |x| f.clone()(op(x, t))
 }
 
-// shift operator is uncurring
+///
+/// shift operator is uncurring
+///
 pub fn left_shift<T: Copy + std::ops::Add<Output = T>>(
     f: impl Fn(T) -> T + Clone,
     t: T,
@@ -45,14 +47,6 @@ fn is_approx(a: f64, b: f64) -> bool {
 //     }
 // }
 
-fn div<A: Copy, B: std::ops::Div<Output = B>>(
-    a: impl Fn(A) -> B,
-    b: impl Fn(A) -> B,
-) -> impl Fn(A) -> B {
-    move |x| a(x) / b(x)
-    //
-}
-
 // we know t and want the action
 fn test_shift_op(
     f: impl Clone + Fn(f64) -> f64,
@@ -74,6 +68,14 @@ fn test_shift_op(
     action
 }
 
+fn div<A: Copy, B: std::ops::Div<Output = B>>(
+    a: impl Fn(A) -> B,
+    b: impl Fn(A) -> B,
+) -> impl Fn(A) -> B {
+    move |x| a(x) / b(x)
+    //
+}
+
 ///
 /// the original
 ///
@@ -84,6 +86,14 @@ pub fn shift_op(
 ) -> f64 {
     let s = left_shift(f.clone(), t);
     s(x) / f(x)
+}
+
+// i kind of like this approach better
+pub fn left_shift_op(
+    f: impl Clone + Fn(f64) -> f64,
+    t: f64,
+) -> impl Fn(f64) -> f64 {
+    div(left_shift(f.clone(), t), f)
 }
 
 ///
@@ -127,6 +137,7 @@ mod tests {
     use super::*;
     #[test]
     fn test_shift() {
+        println!("{}", left_shift_op(f, 3.0)(3.0));
         println!("{}", test_shift_op(f, 3.0, 3.0));
         println!(
             "{}",
