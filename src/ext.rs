@@ -280,6 +280,7 @@ pub trait Ring4<CF: CoefficientRing> {
     fn numgens(&self) -> usize;
 
     fn generators(&self) -> &[Generator];
+    fn coefficient_ring(&self) -> &[Generator];
     // fn base_ring(&self)
     // fn coefficient_ring(&self) -> CoeffRing;
 }
@@ -304,6 +305,15 @@ fn sub2<CF: CoefficientRing, R: Ring4<CF>, S: Ring4<CF>>(
     v: usize,
 ) {
     let g = r.generators();
+    let A = r.coefficient_ring();
+
+    let g: Vec<&Generator> =
+        g.iter().chain(A.iter()).collect();
+
+    for i in 0..g.len() - 1 {
+        //
+    }
+
     // let g = g.iter().chain(other).collect();
     // let h = (0..g.len())
     //     .map(|n| {

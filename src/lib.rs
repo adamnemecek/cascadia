@@ -20,6 +20,7 @@ mod rationalcanonical;
 mod resultant;
 mod ring;
 mod ringtypes;
+mod shift;
 mod specialseries;
 mod symbol;
 mod term;

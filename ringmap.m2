@@ -366,7 +366,10 @@ sub2 = (S,R,v) -> (                   -- S is the target ring or might be null, 
 		else coefficientRing A; true) else false
      do g = join(g, generators A);
      h := new MutableHashTable;
-     for i from 0 to #g-1 do h#(g#i) = if h#?(g#i) then (h#(g#i),i) else 1:i;
+     for i from 0 to #g-1 do 
+	 	h#(g#i) = if h#?(g#i) 
+			then (h#(g#i),i) 
+			else 1:i;
      h = new HashTable from apply(pairs h, (x,i) -> (x,deepSplice i));
      m := new MutableList from (#g:symbol dummy);
      for opt in v do (
