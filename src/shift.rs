@@ -68,12 +68,19 @@ fn test_shift_op(
     action
 }
 
+fn fn_op<A: Copy, B>(
+    a: impl Fn(A) -> B,
+    b: impl Fn(A) -> B,
+    op: impl Fn(B, B) -> B,
+) -> impl Fn(A) -> B {
+    move |x| op(a(x), b(x))
+}
+
 fn div<A: Copy, B: std::ops::Div<Output = B>>(
     a: impl Fn(A) -> B,
     b: impl Fn(A) -> B,
 ) -> impl Fn(A) -> B {
-    move |x| a(x) / b(x)
-    //
+    fn_op(a, b, B::div)
 }
 
 ///
