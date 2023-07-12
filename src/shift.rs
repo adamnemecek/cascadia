@@ -1,5 +1,6 @@
 fn f(x: f64) -> f64 {
-    x + 2.0
+    // 2.0 * x + 4.0
+    x + x.powf(3.0) + 5.0
 }
 
 // shift operator is uncurring
@@ -18,9 +19,9 @@ fn is_approx(a: f64, b: f64) -> bool {
     (a - b).abs() < 0.01
 }
 
-pub trait Shift<T> {
-    fn shift(&self, t: T) -> Self;
-}
+// pub trait Shift<T> {
+//     fn shift(&self, t: T) -> Self;
+// }
 
 // impl<T, F: Fn(T) -> T + Clone> Shift<T> for Box<F> {
 //     fn shift(&self, t: T) -> Box<F> {
@@ -42,8 +43,8 @@ fn test_shift1(
     println!("{} {}", fx, rhs);
     let ddx = (rhs / fx).ln() / t;
     let action = (t * ddx).exp();
-    println!("result {action} {rhs}");
-    fx * action == rhs
+    println!("result {} {rhs}", fx * action);
+    is_approx(fx * action, rhs)
 }
 
 fn test_shift() {
