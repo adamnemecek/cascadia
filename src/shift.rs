@@ -52,6 +52,14 @@ impl<
     }
 }
 
+// impl<T, I: Iterator<Item = T>> Shift<T> for I {
+//     type Output = Self;
+//     fn shift(&self, t: T) -> Self::Output {
+//         // left_shift(self.clone(), t)
+//         unimplemented!()
+//     }
+// }
+
 // we know t and want the action
 fn test_shift_op(
     f: impl Clone + Fn(f64) -> f64,
@@ -151,7 +159,7 @@ mod tests {
     fn test_shift() {
         // let z = f.shift(3.0)(3.0);
         // let z: f64 = f.shift(3.0)(3.0); // does not work
-        println!("{}", z);
+        // println!("{}", z);
         // let z = f.shift(-3.0);
         println!("{}", left_shift_op(f, 3.0)(3.0));
         println!("{}", test_shift_op(f, 3.0, 3.0));

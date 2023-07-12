@@ -7,6 +7,7 @@ mod ext;
 mod factorization;
 mod fraction;
 mod galoisfields;
+mod gamma;
 mod generic;
 mod hom;
 mod ideal;
