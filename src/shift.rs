@@ -84,13 +84,23 @@ fn shift_op(
 }
 
 // given action, figured out by how much we have to shift
-fn unshift_op(
+fn find_t(
     f: impl Clone + Fn(f64) -> f64,
     x: f64,
     action: f64,
 ) -> f64 {
     let fx = f(x);
-    let sx = fx / action;
+    // let sx = fx * action;
+    unimplemented!()
+}
+
+fn find_x(
+    f: impl Clone + Fn(f64) -> f64,
+    x: f64,
+    action: f64,
+) -> f64 {
+    let fx = f(x);
+    // let sx = fx * action;
     unimplemented!()
 }
 
