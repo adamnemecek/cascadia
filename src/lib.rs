@@ -13,10 +13,12 @@ mod galoisfields;
 mod gamma;
 mod generic;
 mod hom;
+mod hyperplane;
 mod ideal;
 mod incidence;
 mod intfactorization;
 mod iwahori_hecke;
+mod laurent;
 mod linearalgebra;
 mod matrix;
 mod mobius;
@@ -55,10 +57,12 @@ pub mod prelude {
         galoisfields::*,
         generic::*,
         hom::*,
+        hyperplane::*,
         ideal::*,
         incidence::*,
         intfactorization::*,
         iwahori_hecke::*,
+        laurent::*,
         linearalgebra::*,
         matrix::*,
         mobius::*,

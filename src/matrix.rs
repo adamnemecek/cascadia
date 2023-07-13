@@ -2,6 +2,14 @@
 
 use std::ops::*;
 
+// pub trait AddOps<T> {
+//     fn add(
+//         &self,
+//         lhs: &T,
+//         rhs: &T,
+//     ) -> T;
+// }
+
 pub trait RingOps {
     type RingMember: Clone + PartialEq;
     fn add(
@@ -14,10 +22,12 @@ pub trait RingOps {
         lhs: &Self::RingMember,
         rhs: &Self::RingMember,
     ) -> Self::RingMember;
+
     fn neg(
         &self,
         lhs: &Self::RingMember,
     ) -> Self::RingMember;
+
     fn zero(&self) -> Self::RingMember;
     fn one(&self) -> Self::RingMember;
 }
@@ -84,6 +94,7 @@ impl<'a, F: Field> Matrix<'a, F> {
         data1.swap(r1, r2);
         data2.swap(r1, r2);
     }
+
     fn add_multiple_of(
         &self,
         data1: &mut Vec<Vec<F::RingMember>>,
@@ -366,7 +377,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
                 rhs.columns,
             ))
         } else {
-            let mut ans: Matrix<F> = Matrix {
+            let mut ans: Matrix<F> = Self {
                 ring: self.ring,
                 rows: self.rows,
                 columns: rhs.columns,
@@ -397,7 +408,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
     pub fn transpose(&self) -> Matrix<'a, F> {
         let rows = self.columns;
         let columns = self.rows;
-        let mut ans: Matrix<F> = Matrix {
+        let mut ans: Matrix<F> = Self {
             ring: self.ring,
             rows,
             columns,
@@ -539,5 +550,12 @@ impl Display for Error {
                 )
             }
         }
+    }
+}
+
+mod tests {
+    #[test]
+    fn test() {
+        //
     }
 }

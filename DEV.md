@@ -3,6 +3,22 @@
 ## implement
 
 
+## ringhom
+I'm going with how macaulay2 implements it. 
+
+The ringhom 
+
+
+You can get the generator of a ring using index
+http://www2.macaulay2.com/Macaulay2/doc/Macaulay2-1.21/share/doc/Macaulay2/Macaulay2Doc/html/__us.html
+
+macaulay2 implements the SPACE operator which is what they use for ring mapping.
+ this in turns calls rawRingMapEval which is implenented in dd which takes an expr and returns an expr (see how is expr implemented)
+which calls IM2_RingMap_eval_matrix
+
+===
+
+
 Implementation details of the thing
 
 
