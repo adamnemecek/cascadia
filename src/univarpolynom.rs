@@ -1,10 +1,10 @@
 use crate::prelude::*;
 
-pub struct UnivariatePolynomial<S: Ring> {
+pub struct Polynomial<S: Ring> {
     inner: Vec<S>, //
 }
 
-impl<S: Ring> UnivariatePolynomial<S> {
+impl<S: Ring> Polynomial<S> {
     pub fn new(inner: Vec<S>) -> Self {
         Self { inner }
     }
@@ -13,7 +13,10 @@ impl<S: Ring> UnivariatePolynomial<S> {
         self.inner.len()
     }
 
-    pub fn iter(&self) -> impl Iterator<Item = S> + '_ {
+    pub fn iter(
+        &self,
+    ) -> impl Iterator<Item = S> + '_ + ExactSizeIterator
+    {
         self.inner.iter().cloned()
     }
 
@@ -36,7 +39,7 @@ impl<S: Ring> UnivariatePolynomial<S> {
     }
 }
 
-impl<S: Ring> FromIterator<S> for UnivariatePolynomial<S> {
+impl<S: Ring> FromIterator<S> for Polynomial<S> {
     fn from_iter<T: IntoIterator<Item = S>>(
         iter: T,
     ) -> Self {
@@ -44,7 +47,7 @@ impl<S: Ring> FromIterator<S> for UnivariatePolynomial<S> {
     }
 }
 
-impl<S: Ring> IntoIterator for UnivariatePolynomial<S> {
+impl<S: Ring> IntoIterator for Polynomial<S> {
     type Item = S;
     type IntoIter = <Vec<S> as IntoIterator>::IntoIter;
     fn into_iter(self) -> Self::IntoIter {
@@ -54,7 +57,7 @@ impl<S: Ring> IntoIterator for UnivariatePolynomial<S> {
 
 //
 
-impl<S: Ring> std::ops::Add for UnivariatePolynomial<S> {
+impl<S: Ring> std::ops::Add for Polynomial<S> {
     type Output = Self;
     fn add(self, rhs: Self) -> Self {
         // self.iter().zip_longest
@@ -69,14 +72,14 @@ impl<S: Ring> std::ops::Add for UnivariatePolynomial<S> {
     }
 }
 
-impl<S: Ring> std::ops::Sub for UnivariatePolynomial<S> {
+impl<S: Ring> std::ops::Sub for Polynomial<S> {
     type Output = Self;
     fn sub(self, rhs: Self) -> Self {
         unimplemented!()
     }
 }
 
-impl<S: Ring> std::ops::Mul for UnivariatePolynomial<S> {
+impl<S: Ring> std::ops::Mul for Polynomial<S> {
     type Output = Self;
     fn mul(self, rhs: Self) -> Self {
         unimplemented!()
@@ -90,7 +93,7 @@ macro_rules! poly {
     };
 }
 
-// impl<S: Ring> Ring for UnivariatePolynomial<S> {
+// impl<S: Ring> Ring for Polynomial<S> {
 //     //
 // }
 

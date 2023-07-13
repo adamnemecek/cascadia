@@ -1,5 +1,6 @@
 #![feature(type_alias_impl_trait)]
 
+mod abstract_;
 mod coxeter;
 mod determinant;
 mod dual;
@@ -17,6 +18,7 @@ mod incidence;
 mod intfactorization;
 mod iwahori_hecke;
 mod linearalgebra;
+mod matrix;
 mod mobius;
 mod multivarpolynom;
 mod numbertheoretical;
@@ -41,6 +43,7 @@ mod zzmod;
 
 pub mod prelude {
     pub use crate::{
+        abstract_::*,
         coxeter::*,
         determinant::*,
         dual::*,
@@ -57,6 +60,7 @@ pub mod prelude {
         intfactorization::*,
         iwahori_hecke::*,
         linearalgebra::*,
+        matrix::*,
         mobius::*,
         multivarpolynom::*,
         numbertheoretical::*,

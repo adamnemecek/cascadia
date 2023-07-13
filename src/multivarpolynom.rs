@@ -29,6 +29,20 @@ impl std::ops::Mul for MPoly {
         unimplemented!()
     }
 }
+// lazard lifting/evaluation
+// groeovner lifting
+// is groebner for getting inverse?
+
+// R = ZZ[x,y];
+// S = ZZ[a,b,c];
+// f = map(R,S,{x^2,x*y,y^2})
+
+impl MPoly {
+    // the point of this map is to allow you to evaluate the
+    pub fn map(&self, other: &Self, images: &[MPoly]) {
+        unimplemented!()
+    }
+}
 
 mod test {
     #[test]
