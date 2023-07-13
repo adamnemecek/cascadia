@@ -12,6 +12,7 @@ mod fraction;
 mod galoisfields;
 mod gamma;
 mod generic;
+mod graph;
 mod hom;
 mod hyperplane;
 mod ideal;
@@ -56,6 +57,8 @@ pub mod prelude {
         fraction::*,
         galoisfields::*,
         generic::*,
+        graph::*,
+        hom::*,
         hom::*,
         hyperplane::*,
         ideal::*,

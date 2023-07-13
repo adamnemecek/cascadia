@@ -4,9 +4,13 @@ use crate::prelude::*;
 
 // }
 
+//
+// based on macaulay2
+//
 pub struct Hom<Domain: RingOps, Codomain: RingOps> {
     source: Domain,
     target: Codomain,
+    // matrix: Matrix<
 }
 
 impl<Domain: RingOps, Codomain: RingOps>
@@ -14,7 +18,8 @@ impl<Domain: RingOps, Codomain: RingOps>
 {
     //
 
-    fn then(&self) {
+    // from swiftymath
+    pub fn then(&self) {
         //
     }
 }

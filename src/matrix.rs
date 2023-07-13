@@ -12,11 +12,13 @@ use std::ops::*;
 
 pub trait RingOps {
     type Element: Clone + PartialEq;
+
     fn add(
         &self,
         lhs: &Self::Element,
         rhs: &Self::Element,
     ) -> Self::Element;
+
     fn mul(
         &self,
         lhs: &Self::Element,
