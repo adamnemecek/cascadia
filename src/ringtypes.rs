@@ -6,14 +6,23 @@ pub trait RingClass {
 
 use std::ops::{
     Add,
+    AddAssign,
     Mul,
     Sub,
 };
 
+pub trait Zero {
+    fn zero() -> Self;
+    fn is_zero(&self) -> bool;
+}
+
 pub trait Ring:
     Sized
+    + Clone
+    + Zero
     + Eq
     + Add<Output = Self>
+    + AddAssign
     + Sub<Output = Self>
     + Mul<Output = Self>
     + Inv<Output = Self>
