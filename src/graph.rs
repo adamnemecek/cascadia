@@ -28,11 +28,22 @@ impl<T> Graph<T> {
         self.g.add_node(w)
     }
 
+    pub fn remove(&mut self, i: NodeIndex) -> Option<T> {
+        self.g.remove_node(i)
+    }
+
     pub fn connect(
         &mut self,
         from: NodeIndex,
         to: NodeIndex,
     ) -> EdgeIndex {
         self.g.add_edge(from, to, ())
+    }
+
+    pub fn disconnect(
+        &mut self,
+        e: EdgeIndex,
+    ) -> Option<()> {
+        self.g.remove_edge(e)
     }
 }
