@@ -11,32 +11,29 @@ use std::ops::*;
 // }
 
 pub trait RingOps {
-    type RingMember: Clone + PartialEq;
+    type Element: Clone + PartialEq;
     fn add(
         &self,
-        lhs: &Self::RingMember,
-        rhs: &Self::RingMember,
-    ) -> Self::RingMember;
+        lhs: &Self::Element,
+        rhs: &Self::Element,
+    ) -> Self::Element;
     fn mul(
         &self,
-        lhs: &Self::RingMember,
-        rhs: &Self::RingMember,
-    ) -> Self::RingMember;
+        lhs: &Self::Element,
+        rhs: &Self::Element,
+    ) -> Self::Element;
 
-    fn neg(
-        &self,
-        lhs: &Self::RingMember,
-    ) -> Self::RingMember;
+    fn neg(&self, lhs: &Self::Element) -> Self::Element;
 
-    fn zero(&self) -> Self::RingMember;
-    fn one(&self) -> Self::RingMember;
+    fn zero(&self) -> Self::Element;
+    fn one(&self) -> Self::Element;
 }
 
 pub trait Field: RingOps {
     fn inv(
         &self,
-        value: &Self::RingMember,
-    ) -> Result<Self::RingMember, Error>;
+        value: &Self::Element,
+    ) -> Result<Self::Element, Error>;
 }
 
 #[macro_export]
@@ -59,7 +56,7 @@ pub struct Matrix<'a, F: RingOps> {
     ring: &'a F,
     rows: usize,
     columns: usize,
-    data: Vec<Vec<F::RingMember>>,
+    data: Vec<Vec<F::Element>>,
 }
 
 impl<'a, F: RingOps> Matrix<'a, F> {
@@ -75,7 +72,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         &self,
         row: usize,
         col: usize,
-    ) -> F::RingMember {
+    ) -> F::Element {
         self.data[row][col].clone()
     }
 }
@@ -83,8 +80,8 @@ impl<'a, F: RingOps> Matrix<'a, F> {
 impl<'a, F: Field> Matrix<'a, F> {
     fn swap_rows(
         &self,
-        data1: &mut Vec<Vec<F::RingMember>>,
-        data2: &mut Vec<Vec<F::RingMember>>,
+        data1: &mut Vec<Vec<F::Element>>,
+        data2: &mut Vec<Vec<F::Element>>,
         r1: usize,
         r2: usize,
     ) {
@@ -97,11 +94,11 @@ impl<'a, F: Field> Matrix<'a, F> {
 
     fn add_multiple_of(
         &self,
-        data1: &mut Vec<Vec<F::RingMember>>,
-        data2: &mut Vec<Vec<F::RingMember>>,
+        data1: &mut Vec<Vec<F::Element>>,
+        data2: &mut Vec<Vec<F::Element>>,
         r1: usize,
         r2: usize,
-        mul: F::RingMember,
+        mul: F::Element,
     ) {
         for i in 0..data1[r1].len() {
             data1[r1][i] = self.ring.add(
@@ -116,10 +113,10 @@ impl<'a, F: Field> Matrix<'a, F> {
     }
     fn scale_row(
         &self,
-        data1: &mut Vec<Vec<F::RingMember>>,
-        data2: &mut Vec<Vec<F::RingMember>>,
+        data1: &mut Vec<Vec<F::Element>>,
+        data2: &mut Vec<Vec<F::Element>>,
         r1: usize,
-        mul: F::RingMember,
+        mul: F::Element,
     ) {
         for i in 0..data1[r1].len() {
             data1[r1][i] =
@@ -131,7 +128,7 @@ impl<'a, F: Field> Matrix<'a, F> {
 
     fn find_non_zero_pivot(
         &self,
-        data1: &Vec<Vec<F::RingMember>>,
+        data1: &Vec<Vec<F::Element>>,
         start: usize,
     ) -> Result<usize, Error> {
         for i in start..self.rows {
@@ -206,7 +203,7 @@ impl<'a, F: Field> Matrix<'a, F> {
 impl<'a, F: RingOps> Matrix<'a, F> {
     pub fn new(
         ring: &'a F,
-        v: Vec<Vec<F::RingMember>>,
+        v: Vec<Vec<F::Element>>,
     ) -> Self {
         let rows = v.len();
         let columns = v[0].len();
@@ -224,7 +221,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         const COLS: usize,
     >(
         ring: &'a F,
-        data: [[F::RingMember; COLS]; ROWS],
+        data: [[F::Element; COLS]; ROWS],
     ) -> Self {
         let mut v = Vec::new();
         for i in 0..ROWS {
@@ -262,11 +259,8 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         }
     }
 
-    pub fn scale(
-        &self,
-        scalar: F::RingMember,
-    ) -> Matrix<F> {
-        let mut ans: Matrix<F> = Matrix {
+    pub fn scale(&self, scalar: F::Element) -> Self {
+        let mut ans = Self {
             ring: self.ring,
             rows: self.rows,
             columns: self.columns,
