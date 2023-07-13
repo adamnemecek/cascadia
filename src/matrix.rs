@@ -3,32 +3,35 @@
 use std::ops::*;
 
 pub trait RingOps {
-    type Element: Clone + PartialEq;
+    type RingMember: Clone + PartialEq;
     fn add(
         &self,
-        lhs: &Self::Element,
-        rhs: &Self::Element,
-    ) -> Self::Element;
+        lhs: &Self::RingMember,
+        rhs: &Self::RingMember,
+    ) -> Self::RingMember;
     fn mul(
         &self,
-        lhs: &Self::Element,
-        rhs: &Self::Element,
-    ) -> Self::Element;
-    fn neg(&self, lhs: &Self::Element) -> Self::Element;
-    fn zero(&self) -> Self::Element;
-    fn one(&self) -> Self::Element;
+        lhs: &Self::RingMember,
+        rhs: &Self::RingMember,
+    ) -> Self::RingMember;
+    fn neg(
+        &self,
+        lhs: &Self::RingMember,
+    ) -> Self::RingMember;
+    fn zero(&self) -> Self::RingMember;
+    fn one(&self) -> Self::RingMember;
 }
 
 pub trait Field: RingOps {
     fn inv(
         &self,
-        value: &Self::Element,
-    ) -> Result<Self::Element, Error>;
+        value: &Self::RingMember,
+    ) -> Result<Self::RingMember, Error>;
 }
 
 #[macro_export]
 macro_rules! matrix {
-    ($RingOps:expr,[$($($ex:expr),*);*]) => {
+    ($ring:expr,[$($($ex:expr),*);*]) => {
         {
             let data = [$(
                 [$(
@@ -36,17 +39,17 @@ macro_rules! matrix {
                 )*],
 
             )*];
-            Matrix::new_from_array($RingOps, data)
+            Matrix::new_from_array($ring, data)
         }
     };
 }
 
 #[derive(PartialEq, Clone, Debug)]
 pub struct Matrix<'a, F: RingOps> {
-    RingOps: &'a F,
+    ring: &'a F,
     rows: usize,
     columns: usize,
-    data: Vec<Vec<F::Element>>,
+    data: Vec<Vec<F::RingMember>>,
 }
 
 impl<'a, F: RingOps> Matrix<'a, F> {
@@ -62,7 +65,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         &self,
         row: usize,
         col: usize,
-    ) -> F::Element {
+    ) -> F::RingMember {
         self.data[row][col].clone()
     }
 }
@@ -70,8 +73,8 @@ impl<'a, F: RingOps> Matrix<'a, F> {
 impl<'a, F: Field> Matrix<'a, F> {
     fn swap_rows(
         &self,
-        data1: &mut Vec<Vec<F::Element>>,
-        data2: &mut Vec<Vec<F::Element>>,
+        data1: &mut Vec<Vec<F::RingMember>>,
+        data2: &mut Vec<Vec<F::RingMember>>,
         r1: usize,
         r2: usize,
     ) {
@@ -83,45 +86,45 @@ impl<'a, F: Field> Matrix<'a, F> {
     }
     fn add_multiple_of(
         &self,
-        data1: &mut Vec<Vec<F::Element>>,
-        data2: &mut Vec<Vec<F::Element>>,
+        data1: &mut Vec<Vec<F::RingMember>>,
+        data2: &mut Vec<Vec<F::RingMember>>,
         r1: usize,
         r2: usize,
-        mul: F::Element,
+        mul: F::RingMember,
     ) {
         for i in 0..data1[r1].len() {
-            data1[r1][i] = self.RingOps.add(
+            data1[r1][i] = self.ring.add(
                 &data1[r1][i],
-                &self.RingOps.mul(&mul, &data1[r2][i]),
+                &self.ring.mul(&mul, &data1[r2][i]),
             );
-            data2[r1][i] = self.RingOps.add(
+            data2[r1][i] = self.ring.add(
                 &data2[r1][i],
-                &self.RingOps.mul(&mul, &data2[r2][i]),
+                &self.ring.mul(&mul, &data2[r2][i]),
             );
         }
     }
     fn scale_row(
         &self,
-        data1: &mut Vec<Vec<F::Element>>,
-        data2: &mut Vec<Vec<F::Element>>,
+        data1: &mut Vec<Vec<F::RingMember>>,
+        data2: &mut Vec<Vec<F::RingMember>>,
         r1: usize,
-        mul: F::Element,
+        mul: F::RingMember,
     ) {
         for i in 0..data1[r1].len() {
             data1[r1][i] =
-                self.RingOps.mul(&mul, &data1[r1][i]);
+                self.ring.mul(&mul, &data1[r1][i]);
             data2[r1][i] =
-                self.RingOps.mul(&mul, &data2[r1][i]);
+                self.ring.mul(&mul, &data2[r1][i]);
         }
     }
 
     fn find_non_zero_pivot(
         &self,
-        data1: &Vec<Vec<F::Element>>,
+        data1: &Vec<Vec<F::RingMember>>,
         start: usize,
     ) -> Result<usize, Error> {
         for i in start..self.rows {
-            if data1[i][start] != self.RingOps.zero() {
+            if data1[i][start] != self.ring.zero() {
                 return Ok(i);
             }
         }
@@ -136,7 +139,7 @@ impl<'a, F: Field> Matrix<'a, F> {
         }
         let mut data1 = self.data.clone();
         let mut data2 =
-            Self::one(self.RingOps, self.rows).data;
+            Self::one(self.ring, self.rows).data;
 
         //triangulation of the matrix. make it an upper triangular matrix
         for i in 0..self.rows {
@@ -153,7 +156,7 @@ impl<'a, F: Field> Matrix<'a, F> {
             }
 
             let d = data1[i][i].clone();
-            match self.RingOps.inv(&d) {
+            match self.ring.inv(&d) {
                 Ok(d_inv) => {
                     self.scale_row(
                         &mut data1, &mut data2, i, d_inv,
@@ -164,7 +167,7 @@ impl<'a, F: Field> Matrix<'a, F> {
                 }
             }
             for j in i + 1..self.rows {
-                let mult = self.RingOps.neg(&data1[j][i]);
+                let mult = self.ring.neg(&data1[j][i]);
                 self.add_multiple_of(
                     &mut data1, &mut data2, j, i, mult,
                 );
@@ -178,27 +181,27 @@ impl<'a, F: Field> Matrix<'a, F> {
                 let x = self.rows - i - 1;
                 let y = self.rows - j - 1;
                 let mult =
-                    self.RingOps.neg(&data1[y][x].clone());
+                    self.ring.neg(&data1[y][x].clone());
                 self.add_multiple_of(
                     &mut data1, &mut data2, y, x, mult,
                 );
             }
         }
 
-        return Ok(Matrix::new(self.RingOps, data2));
+        return Ok(Matrix::new(self.ring, data2));
     }
 }
 
 impl<'a, F: RingOps> Matrix<'a, F> {
     pub fn new(
-        RingOps: &'a F,
-        v: Vec<Vec<F::Element>>,
+        ring: &'a F,
+        v: Vec<Vec<F::RingMember>>,
     ) -> Self {
         let rows = v.len();
         let columns = v[0].len();
         let data = v;
         Self {
-            RingOps,
+            ring,
             rows,
             columns,
             data,
@@ -209,8 +212,8 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         const ROWS: usize,
         const COLS: usize,
     >(
-        RingOps: &'a F,
-        data: [[F::Element; COLS]; ROWS],
+        ring: &'a F,
+        data: [[F::RingMember; COLS]; ROWS],
     ) -> Self {
         let mut v = Vec::new();
         for i in 0..ROWS {
@@ -218,54 +221,53 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             v.push(row);
         }
         Self {
-            RingOps,
+            ring,
             rows: ROWS,
             columns: COLS,
             data: v,
         }
     }
 
-    pub fn one(RingOps: &'a F, rows: usize) -> Self {
-        let mut data =
-            vec![vec![RingOps.zero(); rows]; rows];
+    pub fn one(ring: &'a F, rows: usize) -> Self {
+        let mut data = vec![vec![ring.zero(); rows]; rows];
         for i in 0..rows {
-            data[i][i] = RingOps.one();
+            data[i][i] = ring.one();
         }
         Self {
-            RingOps,
+            ring,
             rows,
             columns: rows,
             data,
         }
     }
 
-    pub fn zero(RingOps: &'a F, rows: usize) -> Self {
-        let data = vec![vec![RingOps.zero(); rows]; rows];
+    pub fn zero(ring: &'a F, rows: usize) -> Self {
+        let data = vec![vec![ring.zero(); rows]; rows];
         Self {
-            RingOps,
+            ring,
             rows,
             columns: rows,
             data,
         }
     }
 
-    pub fn scale(&self, scalar: F::Element) -> Matrix<F> {
+    pub fn scale(
+        &self,
+        scalar: F::RingMember,
+    ) -> Matrix<F> {
         let mut ans: Matrix<F> = Matrix {
-            RingOps: self.RingOps,
+            ring: self.ring,
             rows: self.rows,
             columns: self.columns,
             data: vec![
-                vec![
-                    self.RingOps.zero();
-                    self.columns
-                ];
+                vec![self.ring.zero(); self.columns];
                 self.rows
             ],
         };
         for i in 0..self.rows {
             for j in 0..self.columns {
                 ans.data[i][j] = self
-                    .RingOps
+                    .ring
                     .mul(&self.data[i][j], &scalar);
             }
         }
@@ -289,12 +291,12 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             )
         } else {
             let mut ans: Matrix<F> = Matrix {
-                RingOps: self.RingOps,
+                ring: self.ring,
                 rows: self.rows,
                 columns: self.columns,
                 data: vec![
                     vec![
-                        self.RingOps.zero();
+                        self.ring.zero();
                         self.columns
                     ];
                     self.rows
@@ -302,7 +304,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             };
             for i in 0..self.rows {
                 for j in 0..self.columns {
-                    ans.data[i][j] = self.RingOps.add(
+                    ans.data[i][j] = self.ring.add(
                         &self.data[i][j],
                         &rhs.data[i][j],
                     );
@@ -329,12 +331,12 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             )
         } else {
             let mut ans: Matrix<F> = Matrix {
-                RingOps: self.RingOps,
+                ring: self.ring,
                 rows: self.rows,
                 columns: self.columns,
                 data: vec![
                     vec![
-                        self.RingOps.zero();
+                        self.ring.zero();
                         self.columns
                     ];
                     self.rows
@@ -342,9 +344,9 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             };
             for i in 0..self.rows {
                 for j in 0..self.columns {
-                    ans.data[i][j] = self.RingOps.add(
+                    ans.data[i][j] = self.ring.add(
                         &self.data[i][j],
-                        &self.RingOps.neg(&rhs.data[i][j]),
+                        &self.ring.neg(&rhs.data[i][j]),
                     );
                 }
             }
@@ -365,12 +367,12 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             ))
         } else {
             let mut ans: Matrix<F> = Matrix {
-                RingOps: self.RingOps,
+                ring: self.ring,
                 rows: self.rows,
                 columns: rhs.columns,
                 data: vec![
                     vec![
-                        self.RingOps.zero();
+                        self.ring.zero();
                         rhs.columns
                     ];
                     self.rows
@@ -379,12 +381,12 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             for i in 0..self.rows {
                 for j in 0..rhs.columns {
                     for k in 0..self.columns {
-                        let prod = self.RingOps.mul(
+                        let prod = self.ring.mul(
                             &self.data[i][k],
                             &rhs.data[k][j],
                         );
                         ans.data[i][j] = self
-                            .RingOps
+                            .ring
                             .add(&ans.data[i][j], &prod);
                     }
                 }
@@ -396,11 +398,11 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         let rows = self.columns;
         let columns = self.rows;
         let mut ans: Matrix<F> = Matrix {
-            RingOps: self.RingOps,
+            ring: self.ring,
             rows,
             columns,
             data: vec![
-                vec![self.RingOps.zero(); columns];
+                vec![self.ring.zero(); columns];
                 rows
             ],
         };
