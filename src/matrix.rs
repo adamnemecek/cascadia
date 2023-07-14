@@ -31,7 +31,7 @@ pub trait RingOps {
     fn one(&self) -> Self::Element;
 }
 
-pub trait Field: RingOps {
+pub trait FieldOps: RingOps {
     fn inv(
         &self,
         value: &Self::Element,
@@ -79,7 +79,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
     }
 }
 
-impl<'a, F: Field> Matrix<'a, F> {
+impl<'a, F: FieldOps> Matrix<'a, F> {
     fn swap_rows(
         &self,
         data1: &mut Vec<Vec<F::Element>>,
@@ -113,6 +113,7 @@ impl<'a, F: Field> Matrix<'a, F> {
             );
         }
     }
+
     fn scale_row(
         &self,
         data1: &mut Vec<Vec<F::Element>>,
@@ -468,7 +469,7 @@ impl<'a, F: RingOps> Mul<&Matrix<'a, F>>
     }
 }
 
-impl<'a, F: Field> Div<&Matrix<'a, F>>
+impl<'a, F: FieldOps> Div<&Matrix<'a, F>>
     for &'a Matrix<'a, F>
 {
     type Output = Matrix<'a, F>;
