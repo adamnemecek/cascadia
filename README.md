@@ -7,16 +7,24 @@ Features:
     * commutative algbera
     * noncommutative algbera
     * coxeter groups
+        * coxeter.jl
     * tree algebras
         * dentriform.jl
     * free algbera
+        * freealgbera-rs
     * combinatorics
+    * signatures
     * matroids
     * vertex operator algebra
     * tutte polynomial
+        * tutte.cpp
+        * tutte.rs
     * hecke algebra
         * https://github.com/sagemath/sage/blob/3230f00aeb49802f99b0a3b76e770fa9d628c4e1/src/sage/algebras/iwahori_hecke_algebra.py#L122
-    * 
+    
+    * polynomial
+        * cdm
+        * 
 
 * symdpoly in scala
 

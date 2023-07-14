@@ -1,7 +1,10 @@
 #![feature(type_alias_impl_trait)]
 
 mod abstract_;
+mod bseries;
+mod coalgebra;
 mod coxeter;
+mod dendriform;
 mod determinant;
 mod dual;
 mod enumerations;
@@ -13,6 +16,7 @@ mod galoisfields;
 mod gamma;
 mod generic;
 mod graph;
+mod group;
 mod hom;
 mod hyperplane;
 mod ideal;
@@ -23,6 +27,7 @@ mod laurent;
 mod linearalgebra;
 mod matrix;
 mod mobius;
+mod monomial;
 mod multivarpolynom;
 mod numbertheoretical;
 mod powerseries;
@@ -39,6 +44,7 @@ mod symbol;
 mod taylor;
 mod term;
 mod toeplitz;
+mod tutte;
 mod typevars;
 mod univarpolynom;
 mod zz;
@@ -47,7 +53,10 @@ mod zzmod;
 pub mod prelude {
     pub use crate::{
         abstract_::*,
+        bseries::*,
+        coalgebra::*,
         coxeter::*,
+        dendriform::*,
         determinant::*,
         dual::*,
         enumerations::*,
@@ -58,6 +67,7 @@ pub mod prelude {
         galoisfields::*,
         generic::*,
         graph::*,
+        group::*,
         hom::*,
         hom::*,
         hyperplane::*,
@@ -69,6 +79,7 @@ pub mod prelude {
         linearalgebra::*,
         matrix::*,
         mobius::*,
+        monomial::*,
         multivarpolynom::*,
         numbertheoretical::*,
         powerseries::*,
@@ -84,6 +95,7 @@ pub mod prelude {
         taylor::*,
         term::*,
         toeplitz::*,
+        tutte::*,
         typevars::*,
         univarpolynom::*,
         zz::*,

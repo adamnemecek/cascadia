@@ -16,6 +16,8 @@ macaulay2 implements the SPACE operator which is what they use for ring mapping.
  this in turns calls rawRingMapEval which is implenented in dd which takes an expr and returns an expr (see how is expr implemented)
 which calls IM2_RingMap_eval_matrix
 
+
+
 ===
 
 
