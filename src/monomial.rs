@@ -26,21 +26,37 @@ use crate::prelude::*;
 // f(a)
 
 #[derive(Debug, Clone)]
-pub struct Monomial<R: Ring> {
+pub struct Monomial<R: Ring + Gens1> {
     pub coefficient: R,
     pub exponents: Vec<char>,
 }
 
-impl<R: Ring> Monomial<R> {
+impl<R: Ring + Gens1> Monomial<R> {
     pub fn new() -> Self {
         unimplemented!()
     }
 
     fn substitute(
         &self,
-        with: &Self,
-        images: &[Self], // in: &[]
+        other: &Self,
+        // gens: &Self,
+        images: &Self, // in: &[]
     ) -> Self {
-        unimplemented!()
+        let g1 = self.coefficient.gens();
+        let g2 = other.coefficient.gens();
+        let mut exponents = vec![];
+
+        for a in self.exponents.iter() {
+            let pos =
+                g1.iter().position(|x| x == a).unwrap();
+            exponents.push(g2[pos]);
+        }
+        Self {
+            coefficient: self.coefficient.clone()
+                * other.coefficient.clone(),
+            exponents,
+        }
+
+        // unimplemented!()
     }
 }

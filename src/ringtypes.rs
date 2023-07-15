@@ -16,6 +16,10 @@ pub trait Zero {
     fn is_zero(&self) -> bool;
 }
 
+pub trait Gens1 {
+    fn gens(&self) -> &[char];
+}
+
 pub trait Ring:
     Sized
     + Clone
