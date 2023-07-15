@@ -14,6 +14,11 @@ impl<Domain, Codomain, F: Fn(Domain) -> Codomain>
     //
 }
 
+// R = ZZ[x,y];
+// S = ZZ[a,b,c];
+// f = map(R,S,{x^2,x*y,y^2})
+// f(a)
+
 //
 // based on macaulay2
 //

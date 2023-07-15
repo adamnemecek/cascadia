@@ -3,6 +3,68 @@
 ## implement
 
 
+## noncommutative bases
+the fundamental question is can i come up with a good way of encoding xxy that is different from 
+i guess one way of approaching this would be to like sor
+we might be able to distinguish two instances of the thing by couting uniques 
+and then like wrap around so that if gens are a,b,c
+and the thing is aab it's really,
+
+lehmer code?
+catalan numbers?
+
+a = 0, 3, 6,
+b = 1, 4, 7
+c = 2, 5, 8
+
+// noncommutative
+we can then encode it with 0, 3, 4 and then we can encode to mean 
+
+a, a, b = 0, 3, 4
+b, a, b = 1, 3, 5,
+b, b, a = 1, 4, 6 
+a, b, a = 0, 1, 3 // most interesting case since it's incremental
+
+### commutative
+in the commutative case, we want to be able to make an easy comparison if they have the same content
+so we can sort it first so that 
+a, a, b = b, a, a 
+
+* the way to compress it is to start with the last block and then starting from the first block, xor and see which ones can be combines, you are trying to redistribute until 
+alternatively split it in half, and try to do the same
+
+
+
+
+
+what we can also do is encode the things as they are 
+
+
+you can't use digits for things with more than 10 items
+
+```rust
+
+// given something like 
+fn encode(n: usize, i: impl Iterator<Item=usize>) -> u128 {
+//
+}
+
+fn decode(n: usize, a: u128) -> impl Iterator<Item=usize> {
+    bit(a).map(|a| a % n)
+//
+// digits()
+}
+```
+
+
+should i represent this as digits?
+
+we might then be able to compress this as a permutation
+
+
+
+
+
 ## ringhom
 I'm going with how macaulay2 implements it. 
 

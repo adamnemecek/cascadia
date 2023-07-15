@@ -1,5 +1,7 @@
 #![feature(type_alias_impl_trait)]
 
+use ext::DivRem;
+
 mod abstract_;
 mod bseries;
 mod coalgebra;
@@ -16,9 +18,11 @@ mod galoisfields;
 mod gamma;
 mod generic;
 mod graph;
+mod groebner;
 mod group;
 mod hom;
 mod hyperplane;
+mod hyperplane_arrangements;
 mod ideal;
 mod incidence;
 mod intfactorization;
@@ -28,7 +32,9 @@ mod linearalgebra;
 mod matrix;
 mod mobius;
 mod monomial;
+mod ordered_counter;
 mod multivarpolynom;
+mod ncpoly;
 mod numbertheoretical;
 mod powerseries;
 mod promoteconvert;
@@ -67,10 +73,12 @@ pub mod prelude {
         galoisfields::*,
         generic::*,
         graph::*,
+        groebner::*,
         group::*,
         hom::*,
         hom::*,
         hyperplane::*,
+        hyperplane_arrangements::*,
         ideal::*,
         incidence::*,
         intfactorization::*,
@@ -80,7 +88,9 @@ pub mod prelude {
         matrix::*,
         mobius::*,
         monomial::*,
+        ordered_counter::*,
         multivarpolynom::*,
+        ncpoly::*,
         numbertheoretical::*,
         powerseries::*,
         promoteconvert::*,

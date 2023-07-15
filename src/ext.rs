@@ -406,3 +406,15 @@ pub fn zip_longest<A: Iterator, B: Iterator>(
 // pub trait IteratorExt {
 // fn zip_longest(&self, other: )
 // }
+
+fn index<
+    Idx: Copy,
+    T: Copy,
+    Iter: Iterator<Item = Idx>,
+    I: std::ops::Index<Idx, Output = T> + 'static,
+>(
+    c: I,
+    mut it: Iter,
+) -> impl Iterator<Item = T> {
+    std::iter::from_fn(move || it.next().map(|i| c[i]))
+}

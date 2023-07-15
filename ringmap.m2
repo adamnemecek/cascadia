@@ -413,10 +413,10 @@ sub2 = (S,R,v) -> (                   -- S is the target ring or might be null, 
      map(ring f,R,f))
 
 -- this gets called
-map(Ring,Ring,List) := RingMap => opts -> (S,R,m) -> (
-     if #m>0 and all(m, o -> class o === Option) then sub2(S,R,m)
-     else map(S,R,matrix(S,{m}),opts)
-     )
+     map1(Ring,Ring,List) := RingMap => opts -> (S,R,m) -> (
+          if #m>0 and all(m, o -> class o === Option) then sub2(S,R,m)
+          else map(S,R,matrix(S,{m}),opts)
+          )
 
 substitute(Matrix,List) := Matrix => (f,v) -> (sub2(,ring f,v)) f
 substitute(Module,List) := Module => (M,v) -> (sub2(,ring M,v)) M
