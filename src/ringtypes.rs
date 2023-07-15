@@ -26,10 +26,9 @@ pub trait Ring:
     + Zero
     + Eq
     + Add<Output = Self>
-    + AddAssign
+    // + AddAssign
     + Sub<Output = Self>
-    + Mul<Output = Self>
-    + Inv<Output = Self>
+    + Mul<Output = Self> // + Inv<Output = Self>
 {
     //
 }

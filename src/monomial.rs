@@ -25,6 +25,30 @@ use crate::prelude::*;
 // f = map(R,S,{x^2,x*y,y^2})
 // f(a)
 
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub struct ZZ1(usize);
+
+impl std::ops::Add for ZZ1 {
+    type Output = Self;
+    fn add(self, rhs: Self) -> Self {
+        Self(self.0 + rhs.0)
+    }
+}
+
+impl std::ops::Sub for ZZ1 {
+    type Output = Self;
+    fn sub(self, rhs: Self) -> Self {
+        Self(self.0 - rhs.0)
+    }
+}
+
+impl std::ops::Mul for ZZ1 {
+    type Output = Self;
+    fn mul(self, rhs: Self) -> Self {
+        Self(self.0 * rhs.0)
+    }
+}
+
 #[derive(Debug, Clone)]
 pub struct Monomial<R: Ring + Gens1> {
     pub coefficient: R,
@@ -37,6 +61,18 @@ impl<R: Ring + Gens1> Monomial<R> {
             coefficient,
             exponents,
         }
+    }
+
+    pub fn eval(
+        &self,
+        f: impl Fn(char) -> Monomial<R>,
+    ) -> Vec<Self> {
+        let c = &self.coefficient;
+        self.exponents
+            .iter()
+            .map(|e| f(*e) * c.clone())
+            .collect()
+        // unimplemented!()
     }
 }
 
@@ -51,6 +87,13 @@ impl<R: Ring + Gens1> std::ops::Mul for Monomial<R> {
                 .chain(rhs.exponents.iter().cloned())
                 .collect(),
         )
+    }
+}
+
+impl<R: Ring + Gens1> std::ops::Mul<R> for Monomial<R> {
+    type Output = Self;
+    fn mul(self, rhs: R) -> Self {
+        Self::new(self.coefficient * rhs, self.exponents)
     }
 }
 
@@ -122,6 +165,7 @@ pub struct R {
 mod tests {
     use super::{
         hom,
+        Monomial,
         R,
     };
     #[test]
@@ -138,5 +182,10 @@ mod tests {
         let a = hom(&['x', 'y'], &['a'], &['c']);
 
         println!("{:?}", a);
+    }
+
+    #[test]
+    fn test2() {
+        // Monomial::
     }
 }

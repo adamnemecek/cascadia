@@ -25,17 +25,18 @@ impl<S: Ring> Polynomial<S> {
         other: &Self,
         len: impl Into<Option<usize>>,
     ) -> Self {
-        let len =
-            len.into().unwrap_or(self.len() + other.len());
-        let mut inner = vec![S::zero(); len];
+        unimplemented!()
+        // let len =
+        //     len.into().unwrap_or(self.len() + other.len());
+        // let mut inner = vec![S::zero(); len];
 
-        for (i, e) in self.iter().enumerate() {
-            for (j, f) in other.iter().enumerate() {
-                inner[(i + j) % len] += e.clone() * f;
-            }
-        }
+        // for (i, e) in self.iter().enumerate() {
+        //     for (j, f) in other.iter().enumerate() {
+        //         inner[(i + j) % len] += e.clone() * f;
+        //     }
+        // }
 
-        Self { inner }
+        // Self { inner }
     }
 }
 
