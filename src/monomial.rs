@@ -17,9 +17,30 @@ pub trait Coeff {
 //         //
 //     },
 // }
+
 use crate::prelude::*;
+
+// R = ZZ[x,y];
+// S = ZZ[a,b,c];
+// f = map(R,S,{x^2,x*y,y^2})
+// f(a)
+
 #[derive(Debug, Clone)]
 pub struct Monomial<R: Ring> {
     pub coefficient: R,
     pub exponents: Vec<char>,
+}
+
+impl<R: Ring> Monomial<R> {
+    pub fn new() -> Self {
+        unimplemented!()
+    }
+
+    fn substitute(
+        &self,
+        with: &Self,
+        images: &[Self], // in: &[]
+    ) -> Self {
+        unimplemented!()
+    }
 }

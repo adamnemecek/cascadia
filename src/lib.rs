@@ -5,6 +5,7 @@ use ext::DivRem;
 mod abstract_;
 mod bseries;
 mod coalgebra;
+mod complex;
 mod coxeter;
 mod dendriform;
 mod determinant;
@@ -31,11 +32,12 @@ mod laurent;
 mod linearalgebra;
 mod matrix;
 mod mobius;
+mod mobius_transform;
 mod monomial;
-mod ordered_counter;
 mod multivarpolynom;
 mod ncpoly;
 mod numbertheoretical;
+mod ordered_counter;
 mod powerseries;
 mod promoteconvert;
 mod qq;
@@ -61,6 +63,7 @@ pub mod prelude {
         abstract_::*,
         bseries::*,
         coalgebra::*,
+        complex::*,
         coxeter::*,
         dendriform::*,
         determinant::*,
@@ -87,11 +90,12 @@ pub mod prelude {
         linearalgebra::*,
         matrix::*,
         mobius::*,
+        mobius_transform::*,
         monomial::*,
-        ordered_counter::*,
         multivarpolynom::*,
         ncpoly::*,
         numbertheoretical::*,
+        ordered_counter::*,
         powerseries::*,
         promoteconvert::*,
         qq::*,
