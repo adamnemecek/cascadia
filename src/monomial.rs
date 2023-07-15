@@ -35,30 +35,51 @@ impl<R: Ring + Gens1> Monomial<R> {
     pub fn new() -> Self {
         unimplemented!()
     }
+}
 
-    fn substitute(
-        &self,
-        other: &Self,
-        // gens: &Self,
-        images: &Self, // in: &[]
-    ) -> Self {
-        let g1 = self.coefficient.gens();
-        let g2 = other.coefficient.gens();
-        let mut exponents = vec![];
+// fn substitute(
+//     &self,
+//     other: &Self,
+//     // gens: &Self,
+//     images: &Self, // in: &[]
+// ) -> Self {
+//     let g1 = self.coefficient.gens();
+//     let g2 = other.coefficient.gens();
+//     let mut exponents = vec![];
 
-        for a in self.exponents.iter() {
-            let pos =
-                g1.iter().position(|x| x == a).unwrap();
-            exponents.push(g2[pos]);
-        }
-        Self {
-            coefficient: self.coefficient.clone()
-                * other.coefficient.clone(),
-            exponents,
-        }
+//     for a in self.exponents.iter() {
+//         let pos =
+//             g1.iter().position(|x| x == a).unwrap();
+//         exponents.push(g2[pos]);
+//     }
+//     Self {
+//         coefficient: self.coefficient.clone()
+//             * other.coefficient.clone(),
+//         exponents,
+//     }
 
-        // unimplemented!()
+//     // unimplemented!()
+// }
+
+// Self {
+//     coefficient: self.coefficient.clone()
+//         * other.coefficient.clone(),
+//     exponents,
+// }
+pub fn hom(
+    g1: &[char],
+    g2: &[char],
+    images: &[char],
+) -> Vec<char> {
+    //
+
+    let mut out = vec![];
+    for a in images.iter() {
+        let pos = g1.iter().position(|x| x == a).unwrap();
+        out.push(g2[pos]);
     }
+
+    out
 }
 
 pub struct R {
@@ -66,16 +87,21 @@ pub struct R {
 }
 
 mod tests {
-    use super::R;
+    use super::{
+        hom,
+        R,
+    };
     #[test]
     fn test1() {
         //
-        let r1 = R {
-            gens: vec!['a', 'b', 'c'],
-        };
+        // let r1 = R {
+        //     gens: vec!['a', 'b', 'c'],
+        // };
 
-        let r2 = R {
-            gens: vec!['x', 'y'],
-        };
+        // let r2 = R {
+        //     gens: vec!['x', 'y'],
+        // };
+        let a = hom(&['x', 'y'], &['a'], &['c']);
+        println!("{:?}", a);
     }
 }

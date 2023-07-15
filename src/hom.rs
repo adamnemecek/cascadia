@@ -31,6 +31,7 @@ pub struct Hom<Domain: RingOps, Codomain: RingOps> {
 impl<Domain: RingOps, Codomain: RingOps>
     Hom<Domain, Codomain>
 {
+    // pub fn new(a: )
     //
 
     // from swiftymath
