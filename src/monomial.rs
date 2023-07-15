@@ -60,3 +60,22 @@ impl<R: Ring + Gens1> Monomial<R> {
         // unimplemented!()
     }
 }
+
+pub struct R {
+    gens: Vec<char>,
+}
+
+mod tests {
+    use super::R;
+    #[test]
+    fn test1() {
+        //
+        let r1 = R {
+            gens: vec!['a', 'b', 'c'],
+        };
+
+        let r2 = R {
+            gens: vec!['x', 'y'],
+        };
+    }
+}
