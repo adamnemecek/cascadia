@@ -32,8 +32,25 @@ pub struct Monomial<R: Ring + Gens1> {
 }
 
 impl<R: Ring + Gens1> Monomial<R> {
-    pub fn new() -> Self {
-        unimplemented!()
+    fn new(coefficient: R, exponents: Vec<char>) -> Self {
+        Self {
+            coefficient,
+            exponents,
+        }
+    }
+}
+
+impl<R: Ring + Gens1> std::ops::Mul for Monomial<R> {
+    type Output = Self;
+    fn mul(self, rhs: Self) -> Self {
+        Self::new(
+            self.coefficient * rhs.coefficient,
+            self.exponents
+                .iter()
+                .cloned()
+                .chain(rhs.exponents.iter().cloned())
+                .collect(),
+        )
     }
 }
 
@@ -82,6 +99,22 @@ pub fn hom(
     out
 }
 
+// pub fn hom(
+//     g1: &[char],
+//     g2: &[char],
+//     images: &[char],
+// ) -> Vec<char> {
+//     //
+
+//     let mut out = vec![];
+//     for a in images.iter() {
+//         let pos = g1.iter().position(|x| x == a).unwrap();
+//         out.push(g2[pos]);
+//     }
+
+//     out
+// }
+
 pub struct R {
     gens: Vec<char>,
 }
@@ -101,7 +134,9 @@ mod tests {
         // let r2 = R {
         //     gens: vec!['x', 'y'],
         // };
+        // g1 should be just
         let a = hom(&['x', 'y'], &['a'], &['c']);
+
         println!("{:?}", a);
     }
 }
