@@ -33,6 +33,22 @@ pub trait Ring:
     //
 }
 
+///
+/// this is a work around so that we dont have to lookup the positions
+/// for every generator
+///
+pub struct Gen<R: Ring> {
+    index: usize,
+    name: String,
+    p: std::marker::PhantomData<R>,
+}
+
+pub trait Gens2<R: Ring> {
+    fn gens(&self) -> &[Gen<R>];
+}
+
+// fn reindex()
+
 // abstract type RingClass {}
 pub trait FractionRingClass: RingClass {
     //

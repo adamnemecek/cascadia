@@ -6,6 +6,8 @@
 
 // albert2005
 
+use crate::prelude::*;
+
 pub trait Coeff {
     //
 }
@@ -18,12 +20,12 @@ pub trait Coeff {
 //     },
 // }
 
-use crate::prelude::*;
-
 // R = ZZ[x,y];
 // S = ZZ[a,b,c];
 // f = map(R,S,{x^2,x*y,y^2})
 // f(a)
+
+// assert(#images == #(gens S))
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub struct ZZ1(usize);
@@ -46,6 +48,16 @@ impl std::ops::Mul for ZZ1 {
     type Output = Self;
     fn mul(self, rhs: Self) -> Self {
         Self(self.0 * rhs.0)
+    }
+}
+
+impl Zero for ZZ1 {
+    fn zero() -> Self {
+        Self(0)
+    }
+
+    fn is_zero(&self) -> bool {
+        self.0 == 0
     }
 }
 

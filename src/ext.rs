@@ -407,6 +407,17 @@ pub fn zip_longest<A: Iterator, B: Iterator>(
 // fn zip_longest(&self, other: )
 // }
 
+// fn positions<Idx: Copy, T: Copy>(
+//     slice: &[T],
+//     elements: impl Iterator<Item = T>,
+// ) -> impl Iterator<Item = usize> {
+//     elements.map(|x| {
+//         slice.position
+//     })
+//     // unimplemented!()
+// }
+
+/// get the elements at the index
 fn index<
     Idx: Copy,
     T: Copy,
