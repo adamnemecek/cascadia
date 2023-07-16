@@ -38,13 +38,26 @@ pub trait Ring:
 /// for every generator
 ///
 pub struct Gen<R: Ring> {
+    // index of the generator into the parent ring
     index: usize,
     name: String,
-    p: std::marker::PhantomData<R>,
+    parent: std::rc::Rc<R>, // p: std::marker::PhantomData<R>,
+}
+
+pub fn group_by_counter<'a, T: Eq>(
+    e: &'a [T],
+) -> impl Iterator<Item = (&'a T, usize)> {
+    let g = e.group_by(T::eq);
+
+    g.map(|g| (&g[0], g.len()))
 }
 
 pub trait Gens2<R: Ring> {
     fn gens(&self) -> &[Gen<R>];
+}
+
+fn hom3() {
+    //
 }
 
 // fn reindex()

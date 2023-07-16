@@ -1,3 +1,4 @@
+#![feature(slice_group_by)]
 #![feature(type_alias_impl_trait)]
 
 use ext::DivRem;
