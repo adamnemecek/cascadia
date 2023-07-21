@@ -1,4 +1,4 @@
-// https://github.com/debasish-raychawdhuri/linearalgebra-rust/blob/master/src/lib.rs
+/// https://github.com/debasish-raychawdhuri/linearalgebra-rust/blob/master/src/lib.rs
 
 use std::ops::*;
 
@@ -226,11 +226,8 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         ring: &'a F,
         data: [[F::Element; COLS]; ROWS],
     ) -> Self {
-        let mut v = Vec::new();
-        for i in 0..ROWS {
-            let row = data[i].to_vec();
-            v.push(row);
-        }
+        let v =
+            (0..ROWS).map(|i| data[i].to_vec()).collect();
         Self {
             ring,
             rows: ROWS,
