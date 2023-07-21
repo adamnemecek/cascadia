@@ -6,5 +6,3 @@ pub struct Toeplitz {
     //
     // m: Matrix<
 }
-
-

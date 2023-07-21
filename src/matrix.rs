@@ -239,10 +239,14 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         }
     }
 
-    pub fn one(ring: &'a F, rows: usize) -> Self {
+    pub fn diag(
+        ring: &'a F,
+        rows: usize,
+        v: F::Element,
+    ) -> Self {
         let mut data = vec![vec![ring.zero(); rows]; rows];
         for i in 0..rows {
-            data[i][i] = ring.one();
+            data[i][i] = v.clone();
         }
         Self {
             ring,
@@ -250,6 +254,10 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             columns: rows,
             data,
         }
+    }
+
+    pub fn one(ring: &'a F, rows: usize) -> Self {
+        Self::diag(ring, rows, ring.one())
     }
 
     pub fn zero(ring: &'a F, rows: usize) -> Self {
@@ -298,7 +306,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
                 ),
             )
         } else {
-            let mut ans: Matrix<F> = Matrix {
+            let mut ans = Self {
                 ring: self.ring,
                 rows: self.rows,
                 columns: self.columns,
@@ -338,7 +346,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
                 ),
             )
         } else {
-            let mut ans: Matrix<F> = Matrix {
+            let mut ans = Self {
                 ring: self.ring,
                 rows: self.rows,
                 columns: self.columns,
@@ -374,7 +382,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
                 rhs.columns,
             ))
         } else {
-            let mut ans: Matrix<F> = Self {
+            let mut ans = Self {
                 ring: self.ring,
                 rows: self.rows,
                 columns: rhs.columns,
@@ -405,7 +413,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
     pub fn transpose(&self) -> Matrix<'a, F> {
         let rows = self.columns;
         let columns = self.rows;
-        let mut ans: Matrix<F> = Self {
+        let mut ans = Self {
             ring: self.ring,
             rows,
             columns,

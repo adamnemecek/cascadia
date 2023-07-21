@@ -429,3 +429,8 @@ fn index<
 ) -> impl Iterator<Item = T> {
     std::iter::from_fn(move || it.next().map(|i| c[i]))
 }
+
+// find the positions of
+// pub fn reindex() {
+
+// }

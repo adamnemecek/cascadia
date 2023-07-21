@@ -44,10 +44,13 @@ pub struct Gen<R: Ring> {
     parent: std::rc::Rc<R>, // p: std::marker::PhantomData<R>,
 }
 
+///
+/// sequential counter of how many things there are
+///
 pub fn group_by_counter<'a, T: Eq>(
-    e: &'a [T],
+    i: &'a [T],
 ) -> impl Iterator<Item = (&'a T, usize)> {
-    let g = e.group_by(T::eq);
+    let g = i.group_by(T::eq);
 
     g.map(|g| (&g[0], g.len()))
 }
