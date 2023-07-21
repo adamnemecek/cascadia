@@ -69,13 +69,13 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         self.cols
     }
 
-    pub fn value_at(
-        &self,
-        row: usize,
-        col: usize,
-    ) -> F::Element {
-        self.data[row][col].clone()
-    }
+    // pub fn value_at(
+    //     &self,
+    //     row: usize,
+    //     col: usize,
+    // ) -> F::Element {
+    //     self.data[row][col].clone()
+    // }
 }
 
 impl<'a, F: FieldOps> Matrix<'a, F> {
@@ -279,9 +279,9 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         };
         for i in 0..self.rows {
             for j in 0..self.cols {
-                ans.data[i][j] = self
+                ans[(i, j)] = self
                     .ring
-                    .mul(&self.data[i][j], &scalar);
+                    .mul(&self[(i, j)], &scalar);
             }
         }
         ans
@@ -314,9 +314,9 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             };
             for i in 0..self.rows {
                 for j in 0..self.cols {
-                    ans.data[i][j] = self.ring.add(
-                        &self.data[i][j],
-                        &rhs.data[i][j],
+                    ans[(i, j)] = self.ring.add(
+                        &self[(i, j)],
+                        &rhs[(i, j)],
                     );
                 }
             }
@@ -347,9 +347,9 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             };
             for i in 0..self.rows {
                 for j in 0..self.cols {
-                    ans.data[i][j] = self.ring.add(
-                        &self.data[i][j],
-                        &self.ring.neg(&rhs.data[i][j]),
+                    ans[(i, j)] = self.ring.add(
+                        &self[(i, j)],
+                        &self.ring.neg(&rhs[(i, j)]),
                     );
                 }
             }
@@ -382,12 +382,12 @@ impl<'a, F: RingOps> Matrix<'a, F> {
                 for j in 0..rhs.cols {
                     for k in 0..self.cols {
                         let prod = self.ring.mul(
-                            &self.data[i][k],
-                            &rhs.data[k][j],
+                            &self[(i, k)],
+                            &rhs[(k, j)],
                         );
-                        ans.data[i][j] = self
+                        ans[(i, j)] = self
                             .ring
-                            .add(&ans.data[i][j], &prod);
+                            .add(&ans[(i, j)], &prod);
                     }
                 }
             }
@@ -406,10 +406,23 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         };
         for j in 0..cols {
             for i in 0..rows {
-                ans.data[i][j] = self.data[j][i].clone();
+                ans[(i, j)] = self[(j, i)].clone();
             }
         }
         ans
+    }
+}
+
+impl<'a, F: RingOps> std::ops::Index<(usize, usize)> for Matrix<'a, F> {
+    type Output = F::Element;
+    fn index(&self, index: (usize, usize)) -> &Self::Output {
+        &self.data[index.0][index.1]
+    }
+}
+
+impl<'a, F: RingOps> std::ops::IndexMut<(usize, usize)> for Matrix<'a, F> {
+    fn index_mut(&mut self, index: (usize, usize)) -> &mut Self::Output {
+        &mut self.data[index.0][index.1]
     }
 }
 
