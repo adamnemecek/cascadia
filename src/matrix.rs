@@ -57,7 +57,7 @@ macro_rules! matrix {
 pub struct Matrix<'a, F: RingOps> {
     ring: &'a F,
     rows: usize,
-    columns: usize,
+    cols: usize,
     data: Vec<Vec<F::Element>>,
 }
 
@@ -66,8 +66,8 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         self.rows
     }
 
-    pub fn columns(&self) -> usize {
-        self.columns
+    pub fn cols(&self) -> usize {
+        self.cols
     }
 
     pub fn value_at(
@@ -134,8 +134,9 @@ impl<'a, F: FieldOps> Matrix<'a, F> {
         data1: &Vec<Vec<F::Element>>,
         start: usize,
     ) -> Result<usize, Error> {
+        let zero = self.ring.zero();
         for i in start..self.rows {
-            if data1[i][start] != self.ring.zero() {
+            if data1[i][start] != zero {
                 return Ok(i);
             }
         }
@@ -143,7 +144,7 @@ impl<'a, F: FieldOps> Matrix<'a, F> {
     }
 
     pub fn inverse(&self) -> Result<Self, Error> {
-        if self.rows != self.columns {
+        if self.rows != self.cols {
             return Err(
                 Error::InversionOfRectangularMatrix,
             );
@@ -209,12 +210,12 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         v: Vec<Vec<F::Element>>,
     ) -> Self {
         let rows = v.len();
-        let columns = v[0].len();
+        let cols = v[0].len();
         let data = v;
         Self {
             ring,
             rows,
-            columns,
+            cols,
             data,
         }
     }
@@ -231,7 +232,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         Self {
             ring,
             rows: ROWS,
-            columns: COLS,
+            cols: COLS,
             data: v,
         }
     }
@@ -248,7 +249,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         Self {
             ring,
             rows,
-            columns: rows,
+            cols: rows,
             data,
         }
     }
@@ -262,7 +263,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         Self {
             ring,
             rows,
-            columns: rows,
+            cols: rows,
             data,
         }
     }
@@ -271,14 +272,14 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         let mut ans = Self {
             ring: self.ring,
             rows: self.rows,
-            columns: self.columns,
+            cols: self.cols,
             data: vec![
-                vec![self.ring.zero(); self.columns];
+                vec![self.ring.zero(); self.cols];
                 self.rows
             ],
         };
         for i in 0..self.rows {
-            for j in 0..self.columns {
+            for j in 0..self.cols {
                 ans.data[i][j] = self
                     .ring
                     .mul(&self.data[i][j], &scalar);
@@ -287,36 +288,40 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         ans
     }
 
+    pub fn dims(&self) -> (usize, usize) {
+        (self.rows, self.cols)
+    }
+
     pub fn add(
         &self,
         rhs: &Matrix<'a, F>,
     ) -> Result<Matrix<'a, F>, Error> {
         if self.rows != rhs.rows
-            || self.columns != rhs.columns
+            || self.cols != rhs.cols
         {
             Result::Err(
                 Error::DimensionMismatchForMatrixAddition(
                     self.rows,
-                    self.columns,
+                    self.cols,
                     rhs.rows,
-                    rhs.columns,
+                    rhs.cols,
                 ),
             )
         } else {
             let mut ans = Self {
                 ring: self.ring,
                 rows: self.rows,
-                columns: self.columns,
+                cols: self.cols,
                 data: vec![
                     vec![
                         self.ring.zero();
-                        self.columns
+                        self.cols
                     ];
                     self.rows
                 ],
             };
             for i in 0..self.rows {
-                for j in 0..self.columns {
+                for j in 0..self.cols {
                     ans.data[i][j] = self.ring.add(
                         &self.data[i][j],
                         &rhs.data[i][j],
@@ -332,31 +337,31 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         rhs: &Matrix<F>,
     ) -> Result<Matrix<F>, Error> {
         if self.rows != rhs.rows
-            || self.columns != rhs.columns
+            || self.cols != rhs.cols
         {
             Result::Err(
                 Error::DimensionMismatchForMatrixAddition(
                     self.rows,
-                    self.columns,
+                    self.cols,
                     rhs.rows,
-                    rhs.columns,
+                    rhs.cols,
                 ),
             )
         } else {
             let mut ans = Self {
                 ring: self.ring,
                 rows: self.rows,
-                columns: self.columns,
+                cols: self.cols,
                 data: vec![
                     vec![
                         self.ring.zero();
-                        self.columns
+                        self.cols
                     ];
                     self.rows
                 ],
             };
             for i in 0..self.rows {
-                for j in 0..self.columns {
+                for j in 0..self.cols {
                     ans.data[i][j] = self.ring.add(
                         &self.data[i][j],
                         &self.ring.neg(&rhs.data[i][j]),
@@ -371,29 +376,29 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         &self,
         rhs: &Matrix<F>,
     ) -> Result<Matrix<F>, Error> {
-        if self.columns != rhs.rows {
+        if self.cols != rhs.rows {
             Result::Err(Error::DimensionMismatchForMatrixMultiplication(
                 self.rows,
-                self.columns,
+                self.cols,
                 rhs.rows,
-                rhs.columns,
+                rhs.cols,
             ))
         } else {
             let mut ans = Self {
                 ring: self.ring,
                 rows: self.rows,
-                columns: rhs.columns,
+                cols: rhs.cols,
                 data: vec![
                     vec![
                         self.ring.zero();
-                        rhs.columns
+                        rhs.cols
                     ];
                     self.rows
                 ],
             };
             for i in 0..self.rows {
-                for j in 0..rhs.columns {
-                    for k in 0..self.columns {
+                for j in 0..rhs.cols {
+                    for k in 0..self.cols {
                         let prod = self.ring.mul(
                             &self.data[i][k],
                             &rhs.data[k][j],
@@ -408,18 +413,18 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         }
     }
     pub fn transpose(&self) -> Matrix<'a, F> {
-        let rows = self.columns;
-        let columns = self.rows;
+        let rows = self.cols;
+        let cols = self.rows;
         let mut ans = Self {
             ring: self.ring,
             rows,
-            columns,
+            cols,
             data: vec![
-                vec![self.ring.zero(); columns];
+                vec![self.ring.zero(); cols];
                 rows
             ],
         };
-        for j in 0..columns {
+        for j in 0..cols {
             for i in 0..rows {
                 ans.data[i][j] = self.data[j][i].clone();
             }
