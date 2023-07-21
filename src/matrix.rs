@@ -279,9 +279,8 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         };
         for i in 0..self.rows {
             for j in 0..self.cols {
-                ans[(i, j)] = self
-                    .ring
-                    .mul(&self[(i, j)], &scalar);
+                ans[(i, j)] =
+                    self.ring.mul(&self[(i, j)], &scalar);
             }
         }
         ans
@@ -314,10 +313,9 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             };
             for i in 0..self.rows {
                 for j in 0..self.cols {
-                    ans[(i, j)] = self.ring.add(
-                        &self[(i, j)],
-                        &rhs[(i, j)],
-                    );
+                    ans[(i, j)] = self
+                        .ring
+                        .add(&self[(i, j)], &rhs[(i, j)]);
                 }
             }
             Ok(ans)
@@ -326,8 +324,8 @@ impl<'a, F: RingOps> Matrix<'a, F> {
 
     pub fn sub(
         &self,
-        rhs: &Matrix<F>,
-    ) -> Result<Matrix<F>, Error> {
+        rhs: &Self,
+    ) -> Result<Self, Error> {
         if self.dims() != rhs.dims() {
             Result::Err(
                 Error::DimensionMismatchForMatrixAddition(
@@ -360,9 +358,9 @@ impl<'a, F: RingOps> Matrix<'a, F> {
     pub fn mul(
         &self,
         rhs: &Matrix<F>,
-    ) -> Result<Matrix<F>, Error> {
+    ) -> Result<Self, Error> {
         if self.cols != rhs.rows {
-            Result::Err(Error::DimensionMismatchForMatrixMultiplication(
+            Err(Error::DimensionMismatchForMatrixMultiplication(
                 self.rows,
                 self.cols,
                 rhs.rows,
@@ -413,15 +411,25 @@ impl<'a, F: RingOps> Matrix<'a, F> {
     }
 }
 
-impl<'a, F: RingOps> std::ops::Index<(usize, usize)> for Matrix<'a, F> {
+impl<'a, F: RingOps> std::ops::Index<(usize, usize)>
+    for Matrix<'a, F>
+{
     type Output = F::Element;
-    fn index(&self, index: (usize, usize)) -> &Self::Output {
+    fn index(
+        &self,
+        index: (usize, usize),
+    ) -> &Self::Output {
         &self.data[index.0][index.1]
     }
 }
 
-impl<'a, F: RingOps> std::ops::IndexMut<(usize, usize)> for Matrix<'a, F> {
-    fn index_mut(&mut self, index: (usize, usize)) -> &mut Self::Output {
+impl<'a, F: RingOps> std::ops::IndexMut<(usize, usize)>
+    for Matrix<'a, F>
+{
+    fn index_mut(
+        &mut self,
+        index: (usize, usize),
+    ) -> &mut Self::Output {
         &mut self.data[index.0][index.1]
     }
 }
