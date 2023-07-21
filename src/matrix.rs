@@ -1,5 +1,4 @@
 /// https://github.com/debasish-raychawdhuri/linearalgebra-rust/blob/master/src/lib.rs
-
 use std::ops::*;
 
 // pub trait AddOps<T> {
@@ -296,14 +295,10 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         &self,
         rhs: &Matrix<'a, F>,
     ) -> Result<Matrix<'a, F>, Error> {
-        if self.rows != rhs.rows
-            || self.cols != rhs.cols
-        {
+        if self.dims() != rhs.dims() {
             Result::Err(
                 Error::DimensionMismatchForMatrixAddition(
-                    self.rows,
-                    self.cols,
-                    rhs.rows,
+                    self.rows, self.cols, rhs.rows,
                     rhs.cols,
                 ),
             )
@@ -313,10 +308,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
                 rows: self.rows,
                 cols: self.cols,
                 data: vec![
-                    vec![
-                        self.ring.zero();
-                        self.cols
-                    ];
+                    vec![self.ring.zero(); self.cols];
                     self.rows
                 ],
             };
@@ -336,14 +328,10 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         &self,
         rhs: &Matrix<F>,
     ) -> Result<Matrix<F>, Error> {
-        if self.rows != rhs.rows
-            || self.cols != rhs.cols
-        {
+        if self.dims() != rhs.dims() {
             Result::Err(
                 Error::DimensionMismatchForMatrixAddition(
-                    self.rows,
-                    self.cols,
-                    rhs.rows,
+                    self.rows, self.cols, rhs.rows,
                     rhs.cols,
                 ),
             )
@@ -353,10 +341,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
                 rows: self.rows,
                 cols: self.cols,
                 data: vec![
-                    vec![
-                        self.ring.zero();
-                        self.cols
-                    ];
+                    vec![self.ring.zero(); self.cols];
                     self.rows
                 ],
             };
@@ -389,10 +374,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
                 rows: self.rows,
                 cols: rhs.cols,
                 data: vec![
-                    vec![
-                        self.ring.zero();
-                        rhs.cols
-                    ];
+                    vec![self.ring.zero(); rhs.cols];
                     self.rows
                 ],
             };
@@ -412,6 +394,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             Ok(ans)
         }
     }
+
     pub fn transpose(&self) -> Matrix<'a, F> {
         let rows = self.cols;
         let cols = self.rows;
@@ -419,10 +402,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
             ring: self.ring,
             rows,
             cols,
-            data: vec![
-                vec![self.ring.zero(); cols];
-                rows
-            ],
+            data: vec![vec![self.ring.zero(); cols]; rows],
         };
         for j in 0..cols {
             for i in 0..rows {
