@@ -199,7 +199,7 @@ impl<'a, F: FieldOps> Matrix<'a, F> {
             }
         }
 
-        return Ok(Matrix::new(self.ring, data2));
+        Ok(Self::new(self.ring, data2))
     }
 }
 
@@ -292,8 +292,8 @@ impl<'a, F: RingOps> Matrix<'a, F> {
 
     pub fn add(
         &self,
-        rhs: &Matrix<'a, F>,
-    ) -> Result<Matrix<'a, F>, Error> {
+        rhs: &Self,
+    ) -> Result<Self, Error> {
         if self.dims() != rhs.dims() {
             Result::Err(
                 Error::DimensionMismatchForMatrixAddition(
@@ -393,7 +393,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         }
     }
 
-    pub fn transpose(&self) -> Matrix<'a, F> {
+    pub fn transpose(&self) -> Self {
         let rows = self.cols;
         let cols = self.rows;
         let mut ans = Self {
