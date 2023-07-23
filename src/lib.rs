@@ -10,6 +10,7 @@ mod complex;
 mod coxeter;
 mod dendriform;
 mod determinant;
+mod kronecker;
 mod dual;
 mod enumerations;
 mod expr;
@@ -76,6 +77,7 @@ pub mod prelude {
         fraction::*,
         galoisfields::*,
         generic::*,
+        kronecker::*,
         graph::*,
         groebner::*,
         group::*,

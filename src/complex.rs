@@ -1,5 +1,3 @@
-use petgraph::matrix_graph::UnMatrix;
-
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Sign {
     Pos,
@@ -13,6 +11,10 @@ pub struct Complex<R> {
 
 impl<R> Complex<R> {
     //
+
+    pub fn new(re: R, im: R) -> Self {
+        Self { re, im }
+    }
     pub fn arg(&self) {
         unimplemented!()
     }
@@ -27,9 +29,32 @@ impl<R> Complex<R> {
     }
 }
 
+impl<R: std::ops::Add<Output=R>> std::ops::Add for Complex<R> {
+    type Output = Self;
+    fn add(self, rhs: Self) -> Self {
+        Self::new(self.re + rhs.re, self.im + rhs.im)
+    }
+}
+
+impl<R: std::ops::Sub<Output=R>> std::ops::Sub for Complex<R> {
+    type Output = Self;
+    fn sub(self, rhs: Self) -> Self {
+        Self::new(self.re - rhs.re, self.im - rhs.im)
+    }
+}
+
+
 impl<R> std::ops::Mul for Complex<R> {
     type Output = Self;
     fn mul(self, rhs: Self) -> Self {
+        unimplemented!()
+    }
+}
+
+
+impl<R> std::ops::Div for Complex<R> {
+    type Output = Self;
+    fn div(self, rhs: Self) -> Self {
         unimplemented!()
     }
 }
