@@ -3,4 +3,5 @@
 
 pub struct Coxeter {
     //
+    // m: crate::AbstractMatrix
 }

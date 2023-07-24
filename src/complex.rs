@@ -1,3 +1,5 @@
+// use crate::{Zero, One};
+
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Sign {
     Pos,
@@ -23,11 +25,21 @@ impl<R> Complex<R> {
         unimplemented!()
     }
 
+    // pub fn re(&self) -> R {
+    //     self.re
+    // }
+
     pub fn sign(&self) -> Sign {
         // (Self::i * self.arg()).exp()
         unimplemented!()
     }
 }
+
+// impl <R: Zero + One>  Complex<R> {
+//     fn I() -> Self {
+//         Self::new(R::zero(), R::one())
+//     }
+// }
 
 impl<R: std::ops::Add<Output=R>> std::ops::Add for Complex<R> {
     type Output = Self;
