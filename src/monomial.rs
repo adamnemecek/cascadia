@@ -138,6 +138,10 @@ impl<R: Ring + Gens1> std::ops::Mul<R> for Monomial<R> {
 //         * other.coefficient.clone(),
 //     exponents,
 // }
+
+// substitute
+// https://github.com/habemus-papadum/HaskellForMaths/blob/4ed09d8db4ac2e19eb0180672309885f1d589155/src/Math/Algebra/NonCommutative/NCPoly.hs#L198
+// search for substitute
 pub fn hom(
     g1: &[char],
     g2: &[char],

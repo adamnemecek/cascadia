@@ -2,6 +2,8 @@
 
 Rust crate for algebra
 
+<!-- https://github.com/habemus-papadum/HaskellForMaths/blob/4ed09d8db4ac2e19eb0180672309885f1d589155/src/Math/Algebra/NonCommutative/NCPoly.hs#L198 -->
+
 Features:
     * abstract algebra
     * commutative algbera

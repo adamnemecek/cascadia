@@ -10,7 +10,6 @@ mod complex;
 mod coxeter;
 mod dendriform;
 mod determinant;
-mod kronecker;
 mod dual;
 mod enumerations;
 mod expr;
@@ -30,6 +29,7 @@ mod ideal;
 mod incidence;
 mod intfactorization;
 mod iwahori_hecke;
+mod kronecker;
 mod laurent;
 mod linearalgebra;
 mod matrix;
@@ -49,6 +49,7 @@ mod resultant;
 mod ring;
 mod ringtypes;
 mod shift;
+mod smash_product;
 mod specialseries;
 mod symbol;
 mod taylor;
@@ -60,12 +61,19 @@ mod univarpolynom;
 mod zz;
 mod zzmod;
 
+mod control;
+mod hankel;
+mod hodge;
+mod nominial_set;
+mod stream;
+
 pub mod prelude {
     pub use crate::{
         abstract_::*,
         bseries::*,
         coalgebra::*,
         complex::*,
+        control::*,
         coxeter::*,
         dendriform::*,
         determinant::*,
@@ -77,10 +85,11 @@ pub mod prelude {
         fraction::*,
         galoisfields::*,
         generic::*,
-        kronecker::*,
         graph::*,
         groebner::*,
         group::*,
+        hankel::*,
+        hodge::*,
         hom::*,
         hom::*,
         hyperplane::*,
@@ -89,6 +98,7 @@ pub mod prelude {
         incidence::*,
         intfactorization::*,
         iwahori_hecke::*,
+        kronecker::*,
         laurent::*,
         linearalgebra::*,
         matrix::*,
@@ -97,6 +107,7 @@ pub mod prelude {
         monomial::*,
         multivarpolynom::*,
         ncpoly::*,
+        nominial_set::*,
         numbertheoretical::*,
         ordered_counter::*,
         powerseries::*,
@@ -107,7 +118,10 @@ pub mod prelude {
         resultant::*,
         ring::*,
         ringtypes::*,
+        smash_product::*,
+        smash_product::*,
         specialseries::*,
+        stream::*,
         symbol::*,
         taylor::*,
         term::*,

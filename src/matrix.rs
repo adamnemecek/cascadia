@@ -290,10 +290,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         (self.rows, self.cols)
     }
 
-    pub fn add(
-        &self,
-        rhs: &Self,
-    ) -> Result<Self, Error> {
+    pub fn add(&self, rhs: &Self) -> Result<Self, Error> {
         if self.dims() != rhs.dims() {
             Result::Err(
                 Error::DimensionMismatchForMatrixAddition(
@@ -322,10 +319,7 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         }
     }
 
-    pub fn sub(
-        &self,
-        rhs: &Self,
-    ) -> Result<Self, Error> {
+    pub fn sub(&self, rhs: &Self) -> Result<Self, Error> {
         if self.dims() != rhs.dims() {
             Result::Err(
                 Error::DimensionMismatchForMatrixAddition(

@@ -1,4 +1,5 @@
 // use crate::{Zero, One};
+// https://github.com/rust-num/num-complex/blob/master/src/lib.rs
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Sign {
@@ -41,20 +42,23 @@ impl<R> Complex<R> {
 //     }
 // }
 
-impl<R: std::ops::Add<Output=R>> std::ops::Add for Complex<R> {
+impl<R: std::ops::Add<Output = R>> std::ops::Add
+    for Complex<R>
+{
     type Output = Self;
     fn add(self, rhs: Self) -> Self {
         Self::new(self.re + rhs.re, self.im + rhs.im)
     }
 }
 
-impl<R: std::ops::Sub<Output=R>> std::ops::Sub for Complex<R> {
+impl<R: std::ops::Sub<Output = R>> std::ops::Sub
+    for Complex<R>
+{
     type Output = Self;
     fn sub(self, rhs: Self) -> Self {
         Self::new(self.re - rhs.re, self.im - rhs.im)
     }
 }
-
 
 impl<R> std::ops::Mul for Complex<R> {
     type Output = Self;
@@ -62,7 +66,6 @@ impl<R> std::ops::Mul for Complex<R> {
         unimplemented!()
     }
 }
-
 
 impl<R> std::ops::Div for Complex<R> {
     type Output = Self;
