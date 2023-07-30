@@ -46,3 +46,14 @@ fn generalized_delta(
     //
     levi_civita(superscript) * levi_civita(subscript)
 }
+
+
+mod tests {
+    use super::*;
+    #[test]
+    fn test1() {
+        let a = generalized_delta(&[1,2],&[2,1]);
+        println!("{:?}",  a);
+
+    }
+}
