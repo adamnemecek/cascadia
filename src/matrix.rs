@@ -76,6 +76,26 @@ impl<'a, F: RingOps> Matrix<'a, F> {
     // ) -> F::Element {
     //     self.data[row][col].clone()
     // }
+
+    pub fn cyclical_shift(n: usize, by: isize) -> Self {
+        // diagind
+        unimplemented!()
+    }
+
+    pub fn shift(n: usize, by: isize) -> Self {
+        unimplemented!()
+    }
+
+    // like matlab
+    // pub fn diag_ind(&self, )
+
+    // pub fn get_diag(&self, d: isize) -> impl Iterator<Item=F> {
+    //     unimplemented!()
+    // }
+
+    // pub fn set_diag(&self, d: isize) -> impl Iterator<Item=&mut F> {
+    //     unimplemented!()
+    // }
 }
 
 impl<'a, F: FieldOps> Matrix<'a, F> {

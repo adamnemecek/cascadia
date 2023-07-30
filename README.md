@@ -30,7 +30,7 @@ Features:
 
 * symdpoly in scala
 
-
+https://web.archive.org/web/20170107110618/http://userpages.umbc.edu/~squire/download/TaylorFit.java
 
 The API is heavily inspired by Oscar.jl.
 
