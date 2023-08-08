@@ -66,6 +66,7 @@ mod hankel;
 mod hodge;
 mod nominial_set;
 mod stream;
+mod shuffle;
 
 pub mod prelude {
     pub use crate::{
@@ -73,6 +74,7 @@ pub mod prelude {
         bseries::*,
         coalgebra::*,
         complex::*,
+        shuffle::*,
         control::*,
         coxeter::*,
         dendriform::*,

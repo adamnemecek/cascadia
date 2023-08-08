@@ -53,7 +53,7 @@ mod tests {
     #[test]
     fn test1() {
         let a = generalized_delta(&[1,2],&[2,1]);
-        println!("{:?}",  a);
+        println!("{:?}", a);
 
     }
 }
