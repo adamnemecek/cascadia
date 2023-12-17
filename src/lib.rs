@@ -4,9 +4,11 @@
 use ext::DivRem;
 
 mod abstract_;
+mod binomial;
 mod bseries;
 mod coalgebra;
 mod complex;
+mod control;
 mod coxeter;
 mod dendriform;
 mod determinant;
@@ -15,6 +17,7 @@ mod enumerations;
 mod expr;
 mod ext;
 mod factorization;
+mod feedback;
 mod fraction;
 mod galoisfields;
 mod gamma;
@@ -22,6 +25,8 @@ mod generic;
 mod graph;
 mod groebner;
 mod group;
+mod hankel;
+mod hodge;
 mod hom;
 mod hyperplane;
 mod hyperplane_arrangements;
@@ -33,11 +38,13 @@ mod kronecker;
 mod laurent;
 mod linearalgebra;
 mod matrix;
+mod matroid;
 mod mobius;
 mod mobius_transform;
 mod monomial;
 mod multivarpolynom;
 mod ncpoly;
+mod nominial_set;
 mod numbertheoretical;
 mod ordered_counter;
 mod powerseries;
@@ -49,32 +56,28 @@ mod resultant;
 mod ring;
 mod ringtypes;
 mod shift;
+mod shuffle;
 mod smash_product;
 mod specialseries;
+mod stream;
 mod symbol;
 mod taylor;
 mod term;
 mod toeplitz;
 mod tutte;
 mod typevars;
+mod umbral;
 mod univarpolynom;
 mod zz;
 mod zzmod;
 
-mod control;
-mod hankel;
-mod hodge;
-mod nominial_set;
-mod stream;
-mod shuffle;
-
 pub mod prelude {
     pub use crate::{
         abstract_::*,
+        binomial::*,
         bseries::*,
         coalgebra::*,
         complex::*,
-        shuffle::*,
         control::*,
         coxeter::*,
         dendriform::*,
@@ -84,6 +87,7 @@ pub mod prelude {
         expr::*,
         ext::*,
         factorization::*,
+        feedback::*,
         fraction::*,
         galoisfields::*,
         generic::*,
@@ -104,6 +108,7 @@ pub mod prelude {
         laurent::*,
         linearalgebra::*,
         matrix::*,
+        matroid::*,
         mobius::*,
         mobius_transform::*,
         monomial::*,
@@ -120,16 +125,19 @@ pub mod prelude {
         resultant::*,
         ring::*,
         ringtypes::*,
+        shuffle::*,
         smash_product::*,
         smash_product::*,
         specialseries::*,
         stream::*,
         symbol::*,
         taylor::*,
+        taylor::*,
         term::*,
         toeplitz::*,
         tutte::*,
         typevars::*,
+        umbral::*,
         univarpolynom::*,
         zz::*,
         zzmod::*,

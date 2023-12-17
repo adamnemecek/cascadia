@@ -3,6 +3,9 @@ fn f(x: f64) -> f64 {
     x + 2.0 * x + x.powf(4.0) + 5.0
 }
 
+///
+/// wraps the function in a way
+///
 pub fn op<T: Copy>(
     f: impl Fn(T) -> T + Clone,
     t: T,
@@ -13,6 +16,7 @@ pub fn op<T: Copy>(
 
 ///
 /// shift operator is uncurring
+///
 ///
 pub fn left_shift<T: Copy + std::ops::Add<Output = T>>(
     f: impl Fn(T) -> T + Clone,
@@ -28,6 +32,10 @@ pub fn right_shift<T: Copy + std::ops::Sub<Output = T>>(
     op(f, t, T::sub)
 }
 
+// pub fn taylor<T>(f: impl Fn(T) -> T) {
+//
+// }
+
 // fn exp_shift(t: f64, ddx: bool) {
 //     //
 // }
@@ -41,16 +49,16 @@ pub trait Shift<T> {
     fn shift(&self, t: T) -> Self::Output;
 }
 
-impl<
-        T: Copy + std::ops::Add<Output = T>,
-        F: Fn(T) -> T + Clone,
-    > Shift<T> for F
-{
-    type Output = impl Fn(T) -> T;
-    fn shift(&self, t: T) -> Self::Output {
-        left_shift(self.clone(), t)
-    }
-}
+// impl<
+//         T: Copy + std::ops::Add<Output = T>,
+//         F: Fn(T) -> T + Clone,
+//     > Shift<T> for F
+// {
+//     type Output = impl Fn(T) -> T;
+//     fn shift(&self, t: T) -> Self::Output {
+//         left_shift(self.clone(), t)
+//     }
+// }
 
 // impl<T, I: Iterator<Item = T>> Shift<T> for I {
 //     type Output = Self;
@@ -151,6 +159,44 @@ fn find_hyperplane(f: impl Fn(f64) -> f64) {
     //
 }
 
+// fn binomial_series(alpha: f64, n: usize) -> impl Iterator<Item = f64> {
+//     // https://gist.github.com/powerwlsl/dd3d5e199645ee1f49701ea996893aec
+
+//     // tmp = a^n
+//     // answer = tmp
+//     // for (i = 1; i <= n; i += 1) {
+//     // tmp =  (tmp * (n-i+1) * x )/(a * i)
+//     // answer = answer + tmp
+//     // }
+
+//     let mut tmp = alpha.powf(n as _);
+//     let mut answer = tmp;
+//     let mut it = 0..n;
+
+//     std::iter::from_fn(|| {
+//         let Some(n) = it.next() else { return None };
+//         tmp = (tmp * (n - i + 1));
+//         None
+//     })
+// }
+
+fn binomial(n: usize, mut k: usize) -> usize {
+    // Since binomial(n, k) = binomial(n, n - k), we might as well use
+    // the smaller k to optimize
+    if n - k < k {
+        k = n - k;
+    }
+
+    // Compute the coefficient
+    let mut res: usize = 1;
+    for i in 1..k + 1 {
+        // res = res * FromPrimitive::from_uint(n - k + i).unwrap();
+        // res = res / FromPrimitive::from_uint(i).unwrap();
+    }
+
+    res
+}
+
 // fn test_shift() {
 //     // exp(t * d/dx) * f(x) = f(x + t)
 //     // shift(f, 3.0);
@@ -165,7 +211,7 @@ mod tests {
         // let z: f64 = f.shift(3.0)(3.0); // does not work
         // println!("{}", z);
         // let z = f.shift(-3.0);
-        println!("{}", left_shift_op(f, 3.0)(3.0));
+        println!("{}", left_shift_op(f, 3.0)(4.0));
         println!("{}", test_shift_op(f, 3.0, 3.0));
         println!(
             "{}",
@@ -173,3 +219,6 @@ mod tests {
         );
     }
 }
+
+// left_shift(t, f::Function) = x -> f(x+t)/f(x)
+// tay()

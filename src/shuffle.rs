@@ -26,25 +26,31 @@
 ///
 /// https://github.com/imanolperez/optimal-double-execution/blob/b380087765925043b01fe2f1066e5e2d1d850cf9/src/shuffle.py
 ///
-fn concat(e: usize, i: &[usize]) -> impl Iterator<Item=usize> + '_ {
+fn concat<'a>(
+    e: usize,
+    i: impl Iterator<Item = &'a usize>,
+) -> impl Iterator<Item = usize> {
     // std::iter::from_fn(|| None)
-    std::iter::once(e).chain(i.iter().cloned())
+    std::iter::once(e).chain(i.cloned())
 }
 
-pub fn shuffle(a: &[usize], b: &[usize]) {
-    //
-    // concat()
-    if a.is_empty() {
-        //
-    }
+// pub fn shuffle(a: &[usize], b: &[usize]) -> impl Iterator<Item=usize> {
+//     //
+//     // concat()
+//     if a.is_empty() {
+//         //
+//     }
 
-    if b.is_empty() {
-        //
-    }
+//     if b.is_empty() {
+//         //
+//     }
 
-    // concat(a[0], shuffle(&a[1..], w2))
+//     // let z = concat(a[0], shuffle(&a[1..].iter(), b));
 
-}
+//     // z
+//     unimplemented!()
+
+// }
 
 mod test {
     #[test]

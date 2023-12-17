@@ -11,3 +11,8 @@ pub struct Coxeter {
     //
     // m: crate::AbstractMatrixc
 }
+
+
+pub struct CoxeterMatrix {
+    //
+}
