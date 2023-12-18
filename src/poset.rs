@@ -5,6 +5,7 @@
 // PosetToTableau
 use crate::prelude::*;
 
+// based on sage and that one mathematica package
 pub struct Poset {
     //
 }
