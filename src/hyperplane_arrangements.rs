@@ -6,9 +6,21 @@ pub struct HyperplaneArrangement {
     //
     data: Vec<Hyperplane>,
 }
+impl HyperplaneArrangement {
+    pub fn regions(&mut self) {
+        //
+    }
 
+    pub fn vertices(&mut self) {
+        //
+    }
 
-impl From<Matroid> for HyperplaneArrangement{
+    pub fn insert(&mut self, x: Hyperplane) {
+        unimplemented!()
+    }
+}
+
+impl From<Matroid> for HyperplaneArrangement {
     fn from(value: Matroid) -> Self {
         unimplemented!()
     }

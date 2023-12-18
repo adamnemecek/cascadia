@@ -1,11 +1,7 @@
 // use crate::{Zero, One};
 // https://github.com/rust-num/num-complex/blob/master/src/lib.rs
 
-#[derive(Clone, Copy, PartialEq, Eq, Hash)]
-pub enum Sign {
-    Pos,
-    Neg,
-}
+use crate::prelude::*;
 
 pub struct Complex<R> {
     pub re: R,

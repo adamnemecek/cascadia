@@ -57,6 +57,7 @@ mod ring;
 mod ringtypes;
 mod shift;
 mod shuffle;
+mod sign;
 mod smash_product;
 mod specialseries;
 mod stream;
@@ -126,6 +127,7 @@ pub mod prelude {
         ring::*,
         ringtypes::*,
         shuffle::*,
+        sign::*,
         smash_product::*,
         smash_product::*,
         specialseries::*,
