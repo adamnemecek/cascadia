@@ -3,6 +3,7 @@
 // https://github.com/jmichel7/FinitePosets.jl
 
 // PosetToTableau
+use crate::prelude::*;
 
 pub struct Poset {
     //
@@ -10,4 +11,10 @@ pub struct Poset {
 
 impl Poset {
     //
+}
+
+impl From<YoungTableau> for Poset {
+    fn from(value: YoungTableau) -> Self {
+        unimplemented!()
+    }
 }
