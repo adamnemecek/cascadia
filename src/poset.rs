@@ -6,15 +6,20 @@
 use crate::prelude::*;
 
 // based on sage and that one mathematica package
-pub struct Poset {
+// E == element, R == relation
+pub struct Poset<E, R> {
     //
+    s: std::marker::PhantomData<(E, R)>,
 }
 
-impl Poset {
+impl<E, L> Poset<E, L> {
     //
+    pub fn new(data: &[E], relations: &[R]) -> Self {
+        unimplemented!()
+    }
 }
 
-impl From<YoungTableau> for Poset {
+impl<E, R> From<YoungTableau> for Poset<E, R> {
     fn from(value: YoungTableau) -> Self {
         unimplemented!()
     }
