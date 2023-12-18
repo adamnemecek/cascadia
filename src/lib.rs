@@ -47,6 +47,7 @@ mod ncpoly;
 mod nominial_set;
 mod numbertheoretical;
 mod ordered_counter;
+mod poset;
 mod powerseries;
 mod promoteconvert;
 mod qq;
@@ -69,6 +70,7 @@ mod tutte;
 mod typevars;
 mod umbral;
 mod univarpolynom;
+mod young_tableau;
 mod zz;
 mod zzmod;
 
@@ -118,6 +120,7 @@ pub mod prelude {
         nominial_set::*,
         numbertheoretical::*,
         ordered_counter::*,
+        poset::*,
         powerseries::*,
         promoteconvert::*,
         qq::*,
@@ -141,6 +144,7 @@ pub mod prelude {
         typevars::*,
         umbral::*,
         univarpolynom::*,
+        young_tableau::*,
         zz::*,
         zzmod::*,
     };
