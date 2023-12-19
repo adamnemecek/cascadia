@@ -12,12 +12,16 @@ impl SignVec {
     pub fn iter(&self) -> Iterator<Item=Sign> {
         self.0.iter()
     }
+
+    pub fn len(&self) -> usize {
+        self.0.len()
+    }
 }
 
 impl Index<usize> for SignVec {
     type Output = Sign;
 
     fn index(&self, index: usize) -> &Sign {
-        unimplemented!()
+        &self.0[index]
     }
 }

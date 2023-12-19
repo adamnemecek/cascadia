@@ -18,11 +18,53 @@ impl Sign {
         }
     }
 
+    pub fn is_zero(&self) -> bool {
+        self == &Self::Zero
+    }
+
+
+
+    pub fn is_pos(&self) -> bool {
+        self == &Self::Pos
+    }
+
+    pub fn is_neg(&self) -> bool {
+        self == &Self::Neg
+    }
+
+    pub fn as_char(&self) -> char {
+        match self {
+            Self::Neg => '-',
+            Self::Zero => '0',
+            Self::Pos => '1',
+        }
+    }
+
     pub fn raw(&self) -> isize {
         match self {
             Self::Neg => -1,
             Self::Zero => 0,
             Self::Pos => 1,
+        }
+    }
+}
+
+impl From<Sign> for char {
+    fn from(value: Sign) -> Self {
+        match value {
+            Sign::Neg => '-',
+            Sign::Zero => '0',
+            Sign::Pos => '1',
+        }
+    }
+}
+
+impl From<Sign> for isize {
+    fn from(value: Sign) -> Self {
+        match value {
+            Sign::Neg => -1,
+            Sign::Zero => 0,
+            Sign::Pos => 1,
         }
     }
 }
