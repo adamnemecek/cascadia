@@ -42,6 +42,14 @@ impl SignVec {
     pub fn zero_support(&self) -> Vec<usize> {
         self.iter().positions(|x| x.is_zero()).collect()
     }
+
+    pub fn pos_support(&self) -> Vec<usize> {
+        self.iter().positions(|x| x.is_pos()).collect()
+    }
+
+    pub fn neg_support(&self) -> Vec<usize> {
+        self.iter().positions(|x| x.is_neg()).collect()
+    }
 }
 
 impl std::ops::Index<usize> for SignVec {
