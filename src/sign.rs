@@ -11,10 +11,10 @@ impl Sign {
     pub fn new(v: isize) -> Self {
         if v == 0 {
             Self::Zero
-        } else if v.is_negative() {
-            Self::Neg
-        } else {
+        } else if v.is_positive() {
             Self::Pos
+        } else {
+            Self::Neg
         }
     }
 
