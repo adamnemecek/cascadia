@@ -30,19 +30,35 @@ impl Sign {
         self == &Self::Neg
     }
 
-    pub fn as_char(&self) -> char {
-        match self {
-            Self::Neg => '-',
-            Self::Zero => '0',
-            Self::Pos => '1',
+    // this is essentialy like `.then` of Ordering
+    pub fn compose(&self, other: &Self) -> Self {
+        if !self.is_zero() {
+            *self
+        } else {
+            *other
         }
     }
+}
 
-    pub fn raw(&self) -> isize {
-        match self {
-            Self::Neg => -1,
-            Self::Zero => 0,
-            Self::Pos => 1,
+impl From<char> for Sign {
+    fn from(value: char) -> Self {
+        match value {
+            '-' => Sign::Neg,
+            '0' => Sign::Zero,
+            '1' => Sign::Pos,
+            _ => unimplemented!(),
+        }
+    }
+}
+
+impl From<isize> for Sign {
+    fn from(value: isize) -> Self {
+        if value == 0 {
+            Self::Zero
+        } else if value.is_negative() {
+            Self::Pos
+        } else {
+            Self::Neg
         }
     }
 }
@@ -97,5 +113,13 @@ impl std::ops::Neg for Sign {
             Self::Zero => Self::Zero,
             Self::Neg => Self::Pos,
         }
+    }
+}
+
+// #[test]
+mod tests {
+    #[test]
+    fn test() {
+        //
     }
 }
