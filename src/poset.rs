@@ -9,7 +9,10 @@ use crate::prelude::*;
 // E == element, R == relation
 pub struct Poset<E, R> {
     //
-    s: std::marker::PhantomData<(E, R)>,
+    ground_set: Vec<E>,
+    relations: Vec<R>,
+    // relation_matrix
+    // s: std::marker::PhantomData<(E, R)>,
 }
 
 impl<E, L> Poset<E, L> {
@@ -21,6 +24,20 @@ impl<E, L> Poset<E, L> {
 
 impl<E, R> From<YoungTableau> for Poset<E, R> {
     fn from(value: YoungTableau) -> Self {
+        unimplemented!()
+    }
+}
+
+enum AndiSymmetryStrategy {
+    Rank,
+    None,
+    Digraph,
+}
+
+impl<E, L> Poset<E, L> {
+    //
+    // from macaulay2
+    pub fn new1(data: &[E], relations: &[R]) -> Self {
         unimplemented!()
     }
 }

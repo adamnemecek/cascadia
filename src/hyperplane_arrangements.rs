@@ -18,6 +18,10 @@ impl HyperplaneArrangement {
     pub fn insert(&mut self, x: Hyperplane) {
         unimplemented!()
     }
+
+    pub fn matroid(&self) -> Matroid {
+        unimplemented!()
+    }
 }
 
 impl From<Matroid> for HyperplaneArrangement {
