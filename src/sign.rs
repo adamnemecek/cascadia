@@ -22,8 +22,6 @@ impl Sign {
         self == &Self::Zero
     }
 
-
-
     pub fn is_pos(&self) -> bool {
         self == &Self::Pos
     }
