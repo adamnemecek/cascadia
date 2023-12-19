@@ -16,7 +16,13 @@ impl<T, I: Iterator<Item = T>> IterExt<T> for I {
         self,
         p: impl Fn(T) -> bool,
     ) -> impl Iterator<Item = usize> {
-        std::iter::from_fn(|| None)
+        self.enumerate().filter_map(move |(i, e)| {
+            if p(e) {
+                i.into()
+            } else {
+                None
+            }
+        })
     }
 }
 
@@ -33,9 +39,8 @@ impl SignVec {
         self.0.len()
     }
 
-    fn zero_support(&self) -> Vec<usize> {
-        // self.0.iter().indices(|x| x == 0)
-        vec![]
+    pub fn zero_support(&self) -> Vec<usize> {
+        self.iter().positions(|x| x.is_zero()).collect()
     }
 }
 
