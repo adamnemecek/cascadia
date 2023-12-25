@@ -4,6 +4,8 @@ pub fn taylor(
 ) -> impl Fn(f64) -> f64 {
     move |x| (x - a).exp() * f(x)
 }
+// lagrange inversion
+//
 
 mod tests {
     use super::taylor;
