@@ -33,6 +33,7 @@ mod hyperplane;
 mod hyperplane_arrangements;
 mod ideal;
 mod incidence;
+mod interval;
 mod intfactorization;
 mod iwahori_hecke;
 mod kronecker;
@@ -75,6 +76,7 @@ mod typevars;
 mod umbral;
 mod univarpolynom;
 mod young_tableau;
+mod zonotope;
 mod zz;
 mod zzmod;
 
@@ -109,6 +111,7 @@ pub mod prelude {
         hyperplane_arrangements::*,
         ideal::*,
         incidence::*,
+        interval::*,
         intfactorization::*,
         iwahori_hecke::*,
         kronecker::*,
@@ -150,6 +153,7 @@ pub mod prelude {
         umbral::*,
         univarpolynom::*,
         young_tableau::*,
+        zonotope::*,
         zz::*,
         zzmod::*,
     };

@@ -19,13 +19,13 @@ impl HyperplaneArrangement {
         unimplemented!()
     }
 
-    pub fn matroid(&self) -> Matroid {
+    pub fn matroid(&self) -> LinearMatroid {
         unimplemented!()
     }
 }
 
-impl From<Matroid> for HyperplaneArrangement {
-    fn from(value: Matroid) -> Self {
+impl From<LinearMatroid> for HyperplaneArrangement {
+    fn from(value: LinearMatroid) -> Self {
         unimplemented!()
     }
 }
