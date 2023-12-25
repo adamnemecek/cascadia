@@ -63,6 +63,7 @@ mod sign;
 mod sign_vector;
 mod smash_product;
 mod specialseries;
+mod species;
 mod stream;
 mod symbol;
 mod symmetric_matrix;
@@ -137,6 +138,7 @@ pub mod prelude {
         sign_vector::*,
         smash_product::*,
         specialseries::*,
+        species::*,
         stream::*,
         symbol::*,
         symmetric_matrix::*,
