@@ -37,6 +37,7 @@ mod interval;
 mod intfactorization;
 mod iwahori_hecke;
 mod kronecker;
+mod lattice;
 mod laurent;
 mod linearalgebra;
 mod matrix;
@@ -78,7 +79,6 @@ mod univarpolynom;
 mod young_tableau;
 mod zonotope;
 mod zz;
-mod lattice;
 mod zzmod;
 
 pub mod prelude {
@@ -89,7 +89,6 @@ pub mod prelude {
         coalgebra::*,
         complex::*,
         conat::*,
-        lattice::*,
         control::*,
         coxeter::*,
         dendriform::*,
@@ -117,6 +116,7 @@ pub mod prelude {
         intfactorization::*,
         iwahori_hecke::*,
         kronecker::*,
+        lattice::*,
         laurent::*,
         linearalgebra::*,
         matrix::*,

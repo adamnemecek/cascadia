@@ -1,8 +1,6 @@
 use std::cmp::Ordering;
 
-#[derive(
-    Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Debug,
-)]
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum CoNat<T> {
     Finite(T),
     // infinity
@@ -59,6 +57,32 @@ where
         match self {
             Self::Finite(value) => value.partial_cmp(other),
             Self::Omega => Some(Ordering::Greater),
+        }
+    }
+}
+
+impl<T: PartialOrd> PartialOrd for CoNat<T> {
+    fn partial_cmp(
+        &self,
+        other: &Self,
+    ) -> Option<Ordering> {
+        // match self {
+        //     Self::Finite(value) => value.partial_cmp(other),
+        //     Self::Omega => Some(Ordering::Greater),
+        // }
+        match (self, other) {
+            (Self::Finite(a), Self::Finite(b)) => {
+                a.partial_cmp(b)
+            }
+            (Self::Omega, Self::Finite(_)) => {
+                Ordering::Greater.into()
+            }
+            (Self::Finite(_), Self::Omega) => {
+                Ordering::Less.into()
+            }
+            (Self::Omega, Self::Omega) => {
+                Ordering::Equal.into()
+            }
         }
     }
 }
