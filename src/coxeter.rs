@@ -14,14 +14,15 @@ pub struct CoxeterGroup<T> {
     //
     // m: crate::AbstractMatrix
     gens: Vec<T>,
-    rel: DMatrix<T>,
+    // conatural?
+    rel: DMatrix<usize>,
     // rel
     // reduced
     // lookup
     // bruhat
 }
 
-impl<T: Eq> CoxeterGroup<T> {
+impl<T: Eq + Clone> CoxeterGroup<T> {
     pub fn new(
         gens: &[T],
         rel: impl Fn(&T, &T) -> Option<usize>,
@@ -35,12 +36,15 @@ impl<T: Eq> CoxeterGroup<T> {
                 if let f = rel(j, i) {
                     assert!(e == f);
                 } else {
+                    //
                 }
             }
         }
-        unimplemented!()
 
-        // Self { gens: vec![] }
+        Self {
+            gens: gens.to_vec(),
+            rel: rel_,
+        }
     }
 }
 

@@ -8,6 +8,7 @@ mod binomial;
 mod bseries;
 mod coalgebra;
 mod complex;
+mod conat;
 mod control;
 mod coxeter;
 mod dendriform;
@@ -82,6 +83,7 @@ pub mod prelude {
         bseries::*,
         coalgebra::*,
         complex::*,
+        conat::*,
         control::*,
         coxeter::*,
         dendriform::*,
