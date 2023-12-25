@@ -78,6 +78,7 @@ mod univarpolynom;
 mod young_tableau;
 mod zonotope;
 mod zz;
+mod lattice;
 mod zzmod;
 
 pub mod prelude {
@@ -88,6 +89,7 @@ pub mod prelude {
         coalgebra::*,
         complex::*,
         conat::*,
+        lattice::*,
         control::*,
         coxeter::*,
         dendriform::*,
