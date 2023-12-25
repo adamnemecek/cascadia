@@ -21,16 +21,21 @@ pub struct CoxeterGroup<T> {
     // bruhat
 }
 
-impl<T> CoxeterGroup<T> {
+impl<T: Eq> CoxeterGroup<T> {
     pub fn new(
         gens: &[T],
         rel: impl Fn(&T, &T) -> Option<usize>,
     ) -> Self {
-        let mut rel_ = DMatrix::from_element(10, 10, 2);
+        let l = gens.len();
+        let mut rel_ = DMatrix::from_element(l, l, 2);
+
         for i in gens.iter() {
             for j in gens.iter() {
                 let e: Option<usize> = rel(i, j);
-                let f = rel(j, i);
+                if let f = rel(j, i) {
+                    assert!(e == f);
+                } else {
+                }
             }
         }
         unimplemented!()
