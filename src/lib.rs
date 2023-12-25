@@ -78,6 +78,7 @@ mod tutte;
 mod typevars;
 mod umbral;
 mod univarpolynom;
+mod vector_space;
 mod young_tableau;
 mod zonotope;
 mod zz;
@@ -158,6 +159,7 @@ pub mod prelude {
         typevars::*,
         umbral::*,
         univarpolynom::*,
+        vector_space::*,
         young_tableau::*,
         zonotope::*,
         zz::*,
