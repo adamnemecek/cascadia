@@ -256,6 +256,13 @@ impl<'a, F: RingOps> Matrix<'a, F> {
         }
     }
 
+    pub fn from_fn(
+        shape: (usize, usize),
+        f: impl Fn((usize, usize)) -> F::Element,
+    ) -> Self {
+        unimplemented!()
+    }
+
     pub fn diag(
         ring: &'a F,
         rows: usize,

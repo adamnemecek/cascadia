@@ -2,7 +2,7 @@
 
 use crate::prelude::*;
 
-pub struct Toeplitz {
+pub struct ToeplitzMatrix {
     //
     // m: Matrix<
 }

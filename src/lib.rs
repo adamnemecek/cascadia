@@ -65,9 +65,10 @@ mod smash_product;
 mod specialseries;
 mod stream;
 mod symbol;
+mod symmetric_matrix;
 mod taylor;
 mod term;
-mod toeplitz;
+mod toeplitz_matrix;
 mod tutte;
 mod typevars;
 mod umbral;
@@ -138,9 +139,10 @@ pub mod prelude {
         specialseries::*,
         stream::*,
         symbol::*,
+        symmetric_matrix::*,
         taylor::*,
         term::*,
-        toeplitz::*,
+        toeplitz_matrix::*,
         tutte::*,
         typevars::*,
         umbral::*,
