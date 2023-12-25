@@ -51,11 +51,14 @@ impl<T: Eq + Clone> CoxeterGroup<T> {
                     //
                 }
 
-                assert!(
-                    i == j || e == coone,
-                    "diagonal values have to be one"
-                );
-                assert!(i != j || e >= cotwo, "diagonal values have to be larger than two ");
+                if i == j {
+                    assert!(
+                        e == coone,
+                        "diagonal values have to be one"
+                    );
+                } else {
+                    assert!(e >= cotwo, "non-diagonal values have to be larger than two");
+                }
                 rel_[(i, j)] = e;
             }
         }
