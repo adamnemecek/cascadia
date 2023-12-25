@@ -19,6 +19,12 @@ pub enum CoNat<T> {
 //     }
 // }
 
+// impl<T> CoNat<T> {
+//     fn finite(&self) -> Option<&T> {
+
+//     }
+// }
+
 impl<T, U> std::ops::Add<U> for CoNat<T>
 where
     T: std::ops::Add<U>,
@@ -60,6 +66,14 @@ where
 impl<T> From<T> for CoNat<T> {
     fn from(val: T) -> Self {
         Self::Finite(val)
+    }
+}
+
+mod tests {
+    use super::CoNat;
+    #[test]
+    fn test_conat() {
+        //
     }
 }
 

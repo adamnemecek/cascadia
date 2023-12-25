@@ -35,6 +35,7 @@ impl<T: Eq + Clone> CoxeterGroup<T> {
     ) -> Self {
         let l = gens.len();
 
+        let coone: CoNat<_> = 1.into();
         let cotwo: CoNat<_> = 2.into();
 
         let mut rel_ = DMatrix::from_element(l, l, cotwo);
@@ -49,6 +50,12 @@ impl<T: Eq + Clone> CoxeterGroup<T> {
                 } else {
                     //
                 }
+
+                assert!(
+                    i == j || e == coone,
+                    "diagonal values have to be one"
+                );
+                assert!(i != j || e >= cotwo, "diagonal values have to be larger than two ");
                 rel_[(i, j)] = e;
             }
         }
