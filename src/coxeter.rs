@@ -39,20 +39,21 @@ impl<T: Eq + Clone> CoxeterGroup<T> {
 
         let mut rel_ = DMatrix::from_element(l, l, cotwo);
 
-        for i in gens.iter() {
-            for j in gens.iter() {
+        for (i, a) in gens.iter().enumerate() {
+            for (j, b) in gens.iter().enumerate() {
                 // diagonal has to be one or more
                 // others have to be two or more
-                let e = rel(i, j);
-                if let f = rel(j, i) {
+                let Some(e) = rel(a, b) else { continue };
+                if let Some(f) = rel(b, a) {
                     assert!(e == f);
                 } else {
                     //
                 }
+                rel_[(i, j)] = e;
             }
         }
 
-        is_symmetric(&rel_);
+        // is_symmetric(&rel_);
 
         Self {
             gens: gens.to_vec(),
