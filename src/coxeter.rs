@@ -7,9 +7,20 @@
 // https://github.com/tscrim/coxeter
 // https://github.com/ulthiel/CoxeterGroups.jl/tree/master
 
-pub struct Coxeter {
+// based on https://github.com/punkdit/bruhat/
+pub struct CoxeterGroup<T> {
     //
-    // m: crate::AbstractMatrixc
+    // m: crate::AbstractMatrix
+    gens: Vec<T>,
+}
+
+impl<T> CoxeterGroup<T> {
+    pub fn new(
+        gens: &[T],
+        rel: impl Fn(usize, usize) -> Option<T>,
+    ) -> Self {
+        unimplemented!()
+    }
 }
 
 pub struct CoxeterMatrix {
