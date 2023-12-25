@@ -41,6 +41,7 @@ mod lattice;
 mod laurent;
 mod linearalgebra;
 mod matrix;
+mod matrix_type;
 mod matroid;
 mod mobius;
 mod mobius_transform;
@@ -50,6 +51,7 @@ mod ncpoly;
 mod nominial_set;
 mod numbertheoretical;
 mod ordered_counter;
+mod outer_product;
 mod poset;
 mod powerseries;
 mod promoteconvert;
@@ -120,6 +122,7 @@ pub mod prelude {
         laurent::*,
         linearalgebra::*,
         matrix::*,
+        matrix_type::*,
         matroid::*,
         mobius::*,
         mobius_transform::*,
@@ -129,6 +132,7 @@ pub mod prelude {
         nominial_set::*,
         numbertheoretical::*,
         ordered_counter::*,
+        outer_product::*,
         poset::*,
         powerseries::*,
         promoteconvert::*,
