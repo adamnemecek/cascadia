@@ -1,6 +1,8 @@
 use std::cmp::Ordering;
 
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Debug)]
+#[derive(
+    Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Debug,
+)]
 pub enum CoNat<T> {
     Finite(T),
     // infinity

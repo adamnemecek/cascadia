@@ -1,3 +1,4 @@
 reorder_modules = true
 imports_layout = "Vertical"
 max_width = 60
+imports_granularity = "One"

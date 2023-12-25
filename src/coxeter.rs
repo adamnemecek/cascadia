@@ -9,30 +9,37 @@
 
 use nalgebra::DMatrix;
 
+use crate::prelude::*;
+
 // based on https://github.com/punkdit/bruhat/
 pub struct CoxeterGroup<T> {
     //
     // m: crate::AbstractMatrix
     gens: Vec<T>,
     // conatural?
-    rel: DMatrix<usize>,
+    rel: DMatrix<CoNat<usize>>,
     // rel
     // reduced
     // lookup
     // bruhat
 }
 
+fn is_symmetric<T>(m: &DMatrix<T>) -> bool {
+    unimplemented!();
+}
+
 impl<T: Eq + Clone> CoxeterGroup<T> {
     pub fn new(
         gens: &[T],
-        rel: impl Fn(&T, &T) -> Option<usize>,
+        rel: impl Fn(&T, &T) -> Option<CoNat<usize>>,
     ) -> Self {
         let l = gens.len();
-        let mut rel_ = DMatrix::from_element(l, l, 2);
+        let mut rel_ =
+            DMatrix::from_element(l, l, 2.into());
 
         for i in gens.iter() {
             for j in gens.iter() {
-                let e: Option<usize> = rel(i, j);
+                let e = rel(i, j);
                 if let f = rel(j, i) {
                     assert!(e == f);
                 } else {
@@ -40,6 +47,8 @@ impl<T: Eq + Clone> CoxeterGroup<T> {
                 }
             }
         }
+
+        is_symmetric(&rel_);
 
         Self {
             gens: gens.to_vec(),
