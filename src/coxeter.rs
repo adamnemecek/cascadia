@@ -12,14 +12,26 @@ pub struct CoxeterGroup<T> {
     //
     // m: crate::AbstractMatrix
     gens: Vec<T>,
+    // rel
+    // reduced
+    // lookup
+    // bruhat
 }
 
 impl<T> CoxeterGroup<T> {
     pub fn new(
         gens: &[T],
-        rel: impl Fn(usize, usize) -> Option<T>,
+        rel: impl Fn(&T, &T) -> Option<usize>,
     ) -> Self {
-        unimplemented!()
+        for i in gens.iter() {
+            for j in gens.iter() {
+                let e = rel(i, j);
+                let f = rel(j, i);
+            }
+        }
+        // unimplemented!()
+
+        Self { gens: vec![] }
     }
 }
 
