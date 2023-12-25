@@ -7,11 +7,14 @@
 // https://github.com/tscrim/coxeter
 // https://github.com/ulthiel/CoxeterGroups.jl/tree/master
 
+use nalgebra::DMatrix;
+
 // based on https://github.com/punkdit/bruhat/
 pub struct CoxeterGroup<T> {
     //
     // m: crate::AbstractMatrix
     gens: Vec<T>,
+    rel: DMatrix<T>,
     // rel
     // reduced
     // lookup
@@ -23,18 +26,23 @@ impl<T> CoxeterGroup<T> {
         gens: &[T],
         rel: impl Fn(&T, &T) -> Option<usize>,
     ) -> Self {
+        let mut rel_ = DMatrix::from_element(10, 10, 2);
         for i in gens.iter() {
             for j in gens.iter() {
-                let e = rel(i, j);
+                let e: Option<usize> = rel(i, j);
                 let f = rel(j, i);
             }
         }
-        // unimplemented!()
+        unimplemented!()
 
-        Self { gens: vec![] }
+        // Self { gens: vec![] }
     }
 }
 
 pub struct CoxeterMatrix {
+    //
+}
+
+mod tests {
     //
 }
