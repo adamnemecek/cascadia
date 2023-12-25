@@ -34,11 +34,15 @@ impl<T: Eq + Clone> CoxeterGroup<T> {
         rel: impl Fn(&T, &T) -> Option<CoNat<usize>>,
     ) -> Self {
         let l = gens.len();
-        let mut rel_ =
-            DMatrix::from_element(l, l, 2.into());
+
+        let cotwo: CoNat<_> = 2.into();
+
+        let mut rel_ = DMatrix::from_element(l, l, cotwo);
 
         for i in gens.iter() {
             for j in gens.iter() {
+                // diagonal has to be one or more
+                // others have to be two or more
                 let e = rel(i, j);
                 if let f = rel(j, i) {
                     assert!(e == f);
@@ -54,6 +58,12 @@ impl<T: Eq + Clone> CoxeterGroup<T> {
             gens: gens.to_vec(),
             rel: rel_,
         }
+    }
+}
+
+impl<T: Eq + Clone> PartialEq for CoxeterGroup<T> {
+    fn eq(&self, other: &Self) -> bool {
+        self == other || false
     }
 }
 
