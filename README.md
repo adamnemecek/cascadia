@@ -4,39 +4,44 @@ Rust crate for algebra
 
 <!-- https://github.com/habemus-papadum/HaskellForMaths/blob/4ed09d8db4ac2e19eb0180672309885f1d589155/src/Math/Algebra/NonCommutative/NCPoly.hs#L198 -->
 
-Features:
-    * abstract algebra
-    * commutative algbera
-    * noncommutative algbera
-    * coxeter groups
-        * coxeter.jl
-    * tree algebras
-        * dentriform.jl
-    * free algbera
-        * freealgbera-rs
-    * combinatorics
-    * signatures
-    * matroids
-    * vertex operator algebra
-    * tutte polynomial
-        * tutte.cpp
-        * tutte.rs
-    * hecke algebra
-        * https://github.com/sagemath/sage/blob/3230f00aeb49802f99b0a3b76e770fa9d628c4e1/src/sage/algebras/iwahori_hecke_algebra.py#L122
-    
-    * polynomial
-        * cdm
-        * 
+- posets
+    - finiteposets.jl
+    - simpleposets.jl
+        - conversion to
 
-* symdpoly in scala
+Features:
+    - abstract algebra
+    - commutative algbera
+    - noncommutative algbera
+    - coxeter groups
+        - coxeter.jl
+    - tree algebras
+        - dentriform.jl
+    - free algbera
+        - freealgbera-rs
+    - combinatorics
+    - signatures
+    - matroids
+    - vertex operator algebra
+    - tutte polynomial
+        - tutte.cpp
+        - tutte.rs
+    - hecke algebra
+        - https://github.com/sagemath/sage/blob/3230f00aeb49802f99b0a3b76e770fa9d628c4e1/src/sage/algebras/iwahori_hecke_algebra.py#L122
+
+    - polynomial
+        - cdm
+        -
+
+- symdpoly in scala
 
 https://web.archive.org/web/20170107110618/http://userpages.umbc.edu/~squire/download/TaylorFit.java
 
 The API is heavily inspired by Oscar.jl.
 
-Other inspirations include 
-* [sympycore]()
-* [bruhat](https://github.com/punkdit/bruhat)
+Other inspirations include
+- [sympycore]()
+- [bruhat](https://github.com/punkdit/bruhat)
 
 
 Port of https://github.com/KlausC/CommutativeRings
@@ -50,7 +55,7 @@ Ideally, we would have this api
 
 This crate relies on macros quite a bit for it's API.
 
-The api is inspired by oscar.jl, singular, gap, 
+The api is inspired by oscar.jl, singular, gap,
 
 https://github.com/ulthiel/CoxeterGroups.jl/tree/master/src
 
@@ -66,7 +71,7 @@ f (a * b)                       # => x^3 y
 
 I guess one option for the api do distinguish ZZ from ZZ(5) is providing a default implementation for the ZZ
 
-and then the user can do 
+and then the user can do
 ```rust
 poly!(ZZ::default(), x, y, z);
 // vs
@@ -99,16 +104,16 @@ trait Ring {
 # API Usage
 ```rust
 
-// poly!(QQ, gens!(x, y, z)) == 
+// poly!(QQ, gens!(x, y, z)) ==
 
 
 // let (P, [x,y,z]) = poly!(QQ, x, y, z);
-// the above macaulay2 code would be 
+// the above macaulay2 code would be
 
 let (R, [x, y]) = poly!(ZZ, x, y);
 let (S, [a, b, c]) = poly!(ZZ, a, b, c);
 
-// note that the S has three elements, same 
+// note that the S has three elements, same
 
 // the question is what does the hom funciton take? they are not Ring::Elem per se, they might be expresions
 let f = hom(S, R, [x^2, x*y, y^2]);
@@ -121,7 +126,7 @@ hom()
 
 
 ```
-<!-- 
+<!--
 #[macro_export]
 macro_rules! matrix {
     () => {

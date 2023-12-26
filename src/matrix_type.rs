@@ -12,15 +12,18 @@ pub trait MatrixType<T>:
         // let index = index.into();
         // let from;
         // let to;
-        let (from, to) = if let Some(index) = index.into() {
+        let start = if let Some(index) = index.into() {
             if index < 0 {
-                (0, 0)
+                // (0, 0)
+                0
             } else {
-                (0, 0)
+                // (0, 0)
+                0
             }
             // unimplemented!();
         } else {
-            (0, 0)
+            // (0, 0)
+            0
             // let from
             // unimplemented!();
         };
