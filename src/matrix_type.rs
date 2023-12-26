@@ -3,6 +3,8 @@ pub trait MatrixType<T>:
 {
     fn shape(&self) -> (usize, usize);
 
+    fn linear_index(&self, index:(usize, usize)) -> usize;
+
     fn diag(
         &self,
         index: impl Into<Option<isize>>,

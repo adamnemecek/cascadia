@@ -17,7 +17,7 @@ pub struct Poset<E, R> {
 
 impl<E, L> Poset<E, L> {
     //
-    pub fn new(data: &[E], relations: &[R]) -> Self {
+    pub fn new(ground_set: &[E], relations: &[R]) -> Self {
         unimplemented!()
     }
 }
