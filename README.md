@@ -1,13 +1,69 @@
 # cascasia
 
+
 Rust crate for algebra
 
 <!-- https://github.com/habemus-papadum/HaskellForMaths/blob/4ed09d8db4ac2e19eb0180672309885f1d589155/src/Math/Algebra/NonCommutative/NCPoly.hs#L198 -->
+
+<!-- 
+
+"Matroid
+"Antimatroid
+"Matroid embedding
+"Graphic matroid
+"Matroid theory
+"Dual matroid
+"Sylvester matroid
+"Eulerian matroid
+"Matroid girth
+"Colored matroid"
+"Polymatroid"
+"Matroid independence axioms"
+"Matroids"
+"Sparsity matroid"
+"Frame matroid"
+"Bicircular matroid"
+"Weighted matroid"
+"Regular matroid"
+"Regular matroids"
+"Hereditary property (matroid)"
+"Transversal matroid"
+"Uniform matroid"
+"Partition matroid"
+"Matroid oracle"
+"Basis of a matroid"
+"Base-orderable matroid"
+"Infinite matroid"
+"Matroid intersection"
+"Matroid duality"
+"Oriented matroid"
+"Flat (matroids)"
+"Simple matroid"
+"Matroid minor"
+"Rigidity matroid"
+"Binary matroid"
+"Vámos matroid"
+"Bipartite matroid"
+"Matroid partitioning"
+"Matroid rank"
+"Algebraic matroid"
+"Matroid representation"
+"Paving matroid"
+"Coxeter matroid"
+"Matroid polytope"
+"Matroid parity problem"
+"Delta-matroid"
+"Characteristic polynomial of matroids"
+"Free matroid"
+"Matroid-constrained number partitioning"
+"Matroid constraints"
+ -->
 
 - posets
     - finiteposets.jl
     - simpleposets.jl
         - conversion to
+- interner
 
 Features:
     - abstract algebra
