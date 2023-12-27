@@ -6,11 +6,18 @@ Rust crate for algebra
 <!-- https://github.com/habemus-papadum/HaskellForMaths/blob/4ed09d8db4ac2e19eb0180672309885f1d589155/src/Math/Algebra/NonCommutative/NCPoly.hs#L198 -->
 
 <!-- 
+todo: 
+- implement hyperplanes.sage example
+ -->
+
+<!-- 
+
+"Graphic matroid"
 
 "Matroid
 "Antimatroid
 "Matroid embedding
-"Graphic matroid
+
 "Matroid theory
 "Dual matroid
 "Sylvester matroid
@@ -32,6 +39,7 @@ Rust crate for algebra
 "Partition matroid"
 "Matroid oracle"
 "Basis of a matroid"
+"linear matroid"
 "Base-orderable matroid"
 "Infinite matroid"
 "Matroid intersection"
